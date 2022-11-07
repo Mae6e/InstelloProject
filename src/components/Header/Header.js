@@ -7,7 +7,6 @@ const Header = (props) => {
         props.headerClick(key)
     }
 
-
     let showProfile = null;
     let showMessage = null;
     let showNotification = null;
