@@ -3,13 +3,27 @@ import Axios from "../Axios";
 
 export const AuthContext = React.createContext({
     isAuthentication: false,
-    onAuthentication: () => { },
-    checkAuthentication: ()=>{}
+    onAuthentication: () => { }
 });
 
 const AuthContextProvider = (props) => {
 
-    const [isAuthentication, setIsAuthentication] = useState(false)
+    const getCookie = (cname) => {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    const [isAuthentication, setIsAuthentication] = useState((getCookie("username") !== ''))
 
     const onAuthentication = async (user) => {
 
@@ -32,30 +46,8 @@ const AuthContextProvider = (props) => {
         return getUserResponse
     }
 
-    const checkAuthentication = () => {
-        const user = getCookie("username");
-        if (!isAuthentication && user !== '') {
-            setIsAuthentication(true)
-        }
-    }
-
-    const getCookie = (cname) => {
-        let name = cname + "=";
-        let ca = document.cookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-          let c = ca[i];
-          while (c.charAt(0) === ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) === 0) {
-            return c.substring(name.length, c.length);
-          }
-        }
-        return "";
-      }
-
     return (
-        <AuthContext.Provider value={{ isAuthentication, onAuthentication: (user) => onAuthentication(user),checkAuthentication }}>
+        <AuthContext.Provider value={{ isAuthentication, onAuthentication: (user) => onAuthentication(user) }}>
             {props.children}
         </AuthContext.Provider>
     )
