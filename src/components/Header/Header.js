@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React from "react"
 import CustomSrollbar from '../UI/CustomScrollbar/CustomScrollbar'
+import  {resources} from "../../resource"
 
 const Header = (props) => {
 
@@ -12,20 +13,18 @@ const Header = (props) => {
     let showNotification = null;
 
     if (props.showHeaderItems.isShowProfile) {
-        showProfile = <div uk-drop="mode: click;offset:9" className="header_dropdown profile_dropdown border-t uk-drop uk-open" style={{ right: "2%", top: "1.5%" }}>
+        showProfile = <div uk-drop="mode: click;offset:9" className="header_dropdown profile_dropdown border-t uk-drop uk-open" style={{ left: "2%", top: "1.5%" }}>
             <ul>
-                <li><a href="#"> Account setting </a> </li>
-                <li><a href="#"> Payments </a> </li>
-                <li><a href="#"> Help </a> </li>
-                <li><a href="form-login.html"> Log Out</a></li>
+                <li><a href="#"> {resources.HEADER.ACCOUNT_SETTING} </a> </li>
+                <li><a href="form-login.html"> {resources.HEADER.LOGOUT}</a></li>
             </ul>
         </div>
     }
     else if (props.showHeaderItems.isShowMessage) {
-        showMessage = <div uk-drop="mode: click;offset: 4" className="header_dropdown uk-drop uk-open" style={{ right: "4%", top: "1.5%" }}>
+        showMessage = <div uk-drop="mode: click;offset: 4" className="header_dropdown uk-drop uk-open" style={{ left: "4%", top: "1.5%" }}>
             <h4
                 className="-mt-5 -mx-5 bg-gradient-to-t from-gray-100 to-gray-50 border-b font-bold px-6 py-3">
-                Messages </h4>
+                {resources.HEADER.MESSAGES} </h4>
             <div className="message-box">
                 <CustomSrollbar>
                     <ul className="dropdown_scrollbar" data-simplebar>
@@ -92,14 +91,14 @@ const Header = (props) => {
                     </ul>
                 </CustomSrollbar>
             </div>
-            <a href="trending.html#" className="see-all">See all</a>
+            <a href="trending.html#" className="see-all">{resources.HEADER.SEEALL}</a>
         </div>
     }
     else if (props.showHeaderItems.isShowNotification) {
-        showNotification = <div uk-drop="mode: click;offset: 4" className="header_dropdown uk-drop uk-open" style={{ right: "6%", top: "1.5%" }}>
+        showNotification = <div uk-drop="mode: click;offset: 4" className="header_dropdown uk-drop uk-open" style={{ left: "6%", top: "1.5%" }}>
             <h4
                 className="-mt-5 -mx-5 bg-gradient-to-t from-gray-100 to-gray-50 border-b font-bold px-6 py-3">
-                Notification </h4>
+                {resources.HEADER.NOTIFICATION} </h4>
             <div className="message-box">
                 <CustomSrollbar>
                     <ul className="dropdown_scrollbar" data-simplebar>
@@ -170,13 +169,13 @@ const Header = (props) => {
                     </ul>
                 </CustomSrollbar>
             </div>
-            <a href="trending.html#" className="see-all">See all</a>
+            <a href="trending.html#" className="see-all">{resources.HEADER.SEEALL}</a>
         </div>
     }
 
     return (<header>
         <div className="header_inner">
-            <div className="left-side">
+            <div className="right-side">
                 <div id="logo" className=" uk-hidden@s">
                     <a href="http://demo.foxthemes.net/instellohtml/home.html">
                         <img src="assets/images/logo-mobile.png" alt="" />
@@ -189,7 +188,7 @@ const Header = (props) => {
                 </div>
 
                 <div className="header_search">
-                    <input type="text" placeholder="Search.." />
+                    <input type="text" placeholder={resources.HEADER.SEARCH} />
                     <div className="icon-search">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -200,10 +199,10 @@ const Header = (props) => {
                 </div>
 
             </div>
-            <div className="right-side lg:pr-4">
+            <div className="left-side lg:pr-4">
                 <a href="trending.html#"
-                    className="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">
-                    <i name="add-circle" className="uil-upload"></i> Upload
+                    className="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 ml-4 px-4 py-2 rounded shado text-white">
+                    <i name="add-circle" className="uil-upload"></i> {resources.HEADER.UPLOAD}
                 </a>
                 <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small" className="header_dropdown">
                     <div className="px-4 py-3 -mx-5 -mt-4 mb-5 border-b">

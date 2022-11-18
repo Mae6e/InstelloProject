@@ -54,13 +54,11 @@ const Layout = () => {
         <div className="main_content">
             <Header toggleClick={toggleHandler} showHeaderItems={showHeaderItems} headerClick={(currentKey) => headerHandler(currentKey)} >
             </Header>
-            <div className="container m-auto" onClick={contentHandler}>
-
-                fff
-                ffff
-                ffff
-                ffff
-                ffff
+            <div className="container pro-container m-auto" onClick={contentHandler}>
+                <div className="flex lg:flex-row flex-col items-center lg:py-8 lg:space-x-8"><span>dd</span>
+                <br></br>
+        
+                </div>
             </div>
         </div>
     </div>

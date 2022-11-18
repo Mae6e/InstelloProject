@@ -5,7 +5,7 @@ import './customscrollbar.css'
 
 const CustomScrollbar = (props) => {
   return (
-    <CustomScroll>
+    <CustomScroll rtl={true}>
       {props.children}
     </CustomScroll>
   )
