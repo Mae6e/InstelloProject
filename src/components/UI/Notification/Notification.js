@@ -16,7 +16,6 @@ const NotificationProvider = (message, type) => {
     Store.addNotification({
         content: <Notification message={message} type={type} />,
         onRemoval: () => { },
-        message: "sdkkdfdk",
         title: "error",
         container: "top-center",
         animationIn: ["animate__animated animate__fadeIn"], 

@@ -724,14 +724,21 @@ input[type="number"] {
   box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.12);
 }
 
+ .dark .init-layout input[type="text"],
+ .dark .init-layout input[type="password"],
+ .dark .init-layout input[type="email"],
+ .dark .init-layout input[type="number"] {
+  border: 1px solid #485567 !important;
+  background: #111827 !important;
+}
+
 .dark input[type="text"],
 .dark input[type="password"],
 .dark input[type="email"],
 .dark input[type="number"] {
   color: #b8b6b6 !important;
-  border: 1px solid #485567 !important;
-  background: #111827 !important;
 }
+
 
 .init-layout .switch-container {
   display: flex;
@@ -741,11 +748,11 @@ input[type="number"] {
   font-size: 28px;
 }
 
-.init-layout .switch{
-  top:5px;
+.init-layout .switch {
+  top: 5px;
 }
 
-.init-layout .switch-button{
+.init-layout .switch-button {
   margin: 0 3px 0 3px;
   right: 0;
   cursor: pointer;
@@ -1218,7 +1225,7 @@ input.keyword-input {
 .checkbox label {
   position: relative;
   cursor: pointer;
-  padding-left: 30px;
+  padding-right: 30px;
   line-height: 25px;
 }
 
@@ -1233,12 +1240,12 @@ input.keyword-input {
   position: relative;
   vertical-align: middle;
   cursor: pointer;
-  margin-right: 5px;
+  margin-left: 5px;
   border-radius: 4px;
   -webkit-transition: 0.3s;
   transition: 0.3s;
   position: absolute;
-  left: 0;
+  right: 0;
   top: 1px;
 }
 
@@ -1593,7 +1600,6 @@ input[type="password"],
 input[type="email"] {
   font-family: "Inter", sans-serif;
   text-transform: none;
-  margin-bottom: 2px;
 }
 
 textarea,
@@ -3008,8 +3014,10 @@ header .uk-dropdown {
 
 .error-message {
   color: #e91e63;
-  font-size: 14px;
-  top: 5rem;
+  font-size: 0.8rem;
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 5px;
 }
 
 /* start night-mood */
@@ -3044,7 +3052,9 @@ header .uk-dropdown {
 .sun-svg {
   left: 5px;
 }
-.moon-svg, .sun-svg {
+
+.moon-svg,
+.sun-svg {
   width: 16px;
   height: 16px;
   position: absolute;
@@ -3057,17 +3067,18 @@ header .uk-dropdown {
   right: 5px;
 }
 
-.night-light-label #night-light-checkbox:checked + .night-light-ball {
+.night-light-label #night-light-checkbox:checked+.night-light-ball {
   transform: translateX(28px);
 }
 
-.dark #moon-svg, .dark #sun-svg {
+.dark #moon-svg,
+.dark #sun-svg {
   fill: #e0e0e0 !important;
 }
 
 /* end night-mood */
 
-.danger-message{
+.danger-message {
   background: #e64747;
   display: "flex";
   width: 100%;
@@ -3078,7 +3089,7 @@ header .uk-dropdown {
   border-left: 8px solid #d43d3d;
 }
 
-.success-message{
+.success-message {
   background: #36bf8e;
   display: "flex";
   width: 100%;
@@ -3089,8 +3100,39 @@ header .uk-dropdown {
   border-left: 8px solid #2bab7d
 }
 
-.info-message{
+.info-message {
   background: blue;
 }
 
+.txt-condition {
+  font-size: 14px;
+  padding-top: 1.5px;
+}
 
+input::placeholder {
+  font-family: 'Shabnam';
+}
+
+/* eye icon */
+.init-layout i {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  right: auto;
+}
+
+.init-layout i:hover {
+  color: #ec4899;
+  cursor: pointer;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.disabled-button{
+    cursor: no-drop;
+    background: #363a50 !important;
+    color: #6a708e !important;
+}

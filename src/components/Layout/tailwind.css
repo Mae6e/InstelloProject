@@ -562,8 +562,8 @@ video {
 
 .space-x-1 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
-  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
+  margin-left: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-right: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]){
@@ -2183,8 +2183,8 @@ video {
 
   .lg\:space-x-2 > :not([hidden]) ~ :not([hidden]){
     --tw-space-x-reverse: 0;
-    margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-    margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+    margin-left: calc(0.5rem * var(--tw-space-x-reverse));
+    margin-right: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .lg\:space-y-6 > :not([hidden]) ~ :not([hidden]){
@@ -2195,14 +2195,14 @@ video {
 
   .lg\:space-x-8 > :not([hidden]) ~ :not([hidden]){
     --tw-space-x-reverse: 0;
-    margin-right: calc(2rem * var(--tw-space-x-reverse));
-    margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
+    margin-left: calc(2rem * var(--tw-space-x-reverse));
+    margin-right: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .lg\:space-x-10 > :not([hidden]) ~ :not([hidden]){
     --tw-space-x-reverse: 0;
-    margin-right: calc(2.5rem * var(--tw-space-x-reverse));
-    margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
+    margin-left: calc(2.5rem * var(--tw-space-x-reverse));
+    margin-right: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .lg\:bg-white{

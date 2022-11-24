@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Axios from "../Axios";
-import { resources } from "../resource";
+import SigninAPI from "../api/SigninAPI";
 
 export const AuthContext = React.createContext({
     isAuthentication: false,
@@ -24,30 +23,16 @@ const AuthContextProvider = (props) => {
         return "";
     }
 
-    const [isAuthentication, setIsAuthentication] = useState((getCookie("username") !== ''))
-  
+    const [isAuthentication, setIsAuthentication] = useState((getCookie("email") !== ''))
 
     const onAuthentication = async (user) => {
-
-        let getUserResponse;
-        await Axios.get(`/users?username=${user.username}&&password=${user.password}`)
-            .then((response) => {
-                if (response.status === 200 && response.data.length > 0) {
-                    setIsAuthentication(true)
-                    document.cookie = `username=${user.username}; expires=Thu, 18 Dec 2023 12:00:00 UTC; path=/`;
-                    getUserResponse = { isSuccess: true, message: resources.SIGNIN.SUCCESS_SIGNIN , type:"success" }
-                }
-                else {
-                    getUserResponse = { isSuccess: false, message: resources.SIGNIN.ERROR_SIGNIN , type:"danger" }
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-                getUserResponse = { isSuccess: false, message: error, type:"danger" }
-            })
-        return getUserResponse
+         var response = await SigninAPI(user);
+            if(response.isSuccess){
+                setIsAuthentication(true)
+                document.cookie = `email=${user.email}; expires=Thu, 18 Dec 2023 12:00:00 UTC; path=/`;
+            }
+         return response;
     }
-
 
     return (
         <AuthContext.Provider value={
