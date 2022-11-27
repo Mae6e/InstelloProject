@@ -5143,7 +5143,7 @@ ul.uk-nav-sub {
   position: fixed;
   top: 0;
   bottom: 0;
-  left: 0;
+  right: 0;
   z-index: 1000;
 }
 /*
@@ -5172,9 +5172,14 @@ ul.uk-nav-sub {
   padding: 20px 20px;
   background: #fff;
   /* 3 */
-  overflow-y: auto;
+  /* overflow-y: auto; */
   -webkit-overflow-scrolling: touch;
 }
+.dark .uk-offcanvas-bar {
+  background: #1c263a !important;
+}
+
+
 /* Tablet landscape and bigger */
 @media (min-width: 960px) {
   .uk-offcanvas-bar{
@@ -5198,11 +5203,11 @@ ul.uk-nav-sub {
  * Open
  */
 .uk-open > .uk-offcanvas-bar{
-  left: 0;
+  right: 0;
 }
 .uk-offcanvas-flip .uk-open > .uk-offcanvas-bar{
-  left: auto;
-  right: 0;
+  right: auto;
+  left: 0;
 }
 /*
  * Slide Animation (Used in slide and push mode)
@@ -5225,7 +5230,7 @@ ul.uk-nav-sub {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
+  right: 0;
   /* 2 */
   width: 0;
   overflow: hidden;
@@ -5264,7 +5269,7 @@ ul.uk-nav-sub {
   position: absolute;
   z-index: 1000;
   top: 20px;
-  right: 20px;
+  left: 20px;
   padding: 5px;
 }
 /* Overlay
@@ -5300,6 +5305,19 @@ ul.uk-nav-sub {
 .uk-offcanvas-overlay.uk-open::before {
   opacity: 1;
 }
+.offcanvas-overlay-hide{
+  position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    opacity:0.5;
+    z-index: 0;
+    transition: opacity .15s linear;
+}
+
 /* Prevent scrolling
  ========================================================================== */
 /*

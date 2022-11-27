@@ -11,7 +11,7 @@ const TextInput = (props) => {
     let inputContent;
     switch (props.type) {
         case 'password':
-            inputContent = <><input {...props} type={isPasswordShow?'text':'password'} /><i onClick={()=>setPasswordShown(!isPasswordShow)}>{isPasswordShow ? eye : eyeSlash}</i></>
+            inputContent = <><input {...props} type={isPasswordShow?'text':'password'} /><i onClick={()=>setPasswordShown(!isPasswordShow)}>{isPasswordShow ? eyeSlash : eye}</i></>
             break;
         default:
             break;

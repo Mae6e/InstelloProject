@@ -1,25 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup"
 import { resources } from "../../resource";
 import SignupAPI from "../../api/SignupAPI"
-
 import NotificationProvider from "../../components/UI/Notification/Notification";
-
 import TextInput from "../../components/UI/TextInput/TextInput ";
-import { faRandom } from "@fortawesome/free-solid-svg-icons";
 
-const Signup = () => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-    const [enableSignupButton, setSignupButton] = useState(true);
+const Signup = (props) => {
 
+    const checkboxRef = useRef()
+    const submitIconRef = useRef()
 
-    const CreateUUID=()=> {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-          return v.toString(16);
+    const [disableSignupButton, setSignupButton] = useState(true);
+
+    useEffect(() => {
+        if (props.confirmRule) {
+            checkboxRef.current.checked = props.confirmRule
+            setSignupButton(false)
+        }
+    }, [props.confirmRule])
+
+    const CreateUUID = () => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
         });
-      }
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -36,15 +45,22 @@ const Signup = () => {
             firstname: Yup.string().required(resources.SIGNUP.INPUT_REQUIRED).min(3, resources.SIGNUP.INPUT_MIN_FIRSTNAME).max(50, resources.SIGNUP.INPUT_MAX_FIRSTNAME),
             lastname: Yup.string().required(resources.SIGNUP.INPUT_REQUIRED).min(3, resources.SIGNUP.INPUT_MIN_LASTNAME).max(100, resources.SIGNUP.INPUT_MAX_LASTNAME),
         }),
-        onSubmit: (values) => {
-            SignupAPI({id:CreateUUID() , ...values}).then((response) => {
+        onSubmit: (values ,{resetForm}) => {
+
+            submitIconRef.current.style.display ="var(--fa-display, inline-block)"
+            SignupAPI({ id: CreateUUID(), ...values }).then((response) => {
+                setSignupButton(false)
                 NotificationProvider(response.message, response.type)
+                if(response.isSuccess)
+                resetForm()
+               submitIconRef.current.style.display ="none";
+
             })
         }
     })
 
-    const cconfirmConditionHandler = () => {
-        setSignupButton(!enableSignupButton)
+    const confirmConditionHandler = () => {
+        setSignupButton(!disableSignupButton)
     }
 
     return (<><h1 className="lg:text-3xl text-xl font-semibold mb-6">{resources.SIGNUP.HEADING_SIGNUP}</h1>
@@ -75,16 +91,17 @@ const Signup = () => {
 
             <div className="flex justify-start my-4 space-x-1">
                 <div className="checkbox">
-                    <input type="checkbox" id="chekcbox1" defaultChecked={false} onChange={cconfirmConditionHandler} />
+                    <input ref={checkboxRef} type="checkbox" id="chekcbox1" defaultChecked={props.confirmRule} onChange={confirmConditionHandler} />
                     <label htmlFor="chekcbox1"><span className="checkbox-icon"></span> {resources.SIGNUP.I_AGREE}</label>
                 </div>
-                <a href="form-register.html#" className="txt-condition"> <span>{resources.SIGNUP.TERMS_AND_CONDITIONS}</span></a>
+                <span onClick={props.onShowCanvasPage} className="rule-tag"> <span>{resources.SIGNUP.TERMS_AND_CONDITIONS}</span></span>
             </div>
-            <button type="submit" disabled={enableSignupButton} className={`bg-gradient-to-br ${enableSignupButton ? "disabled-button" : "from-pink-500"} py-3 rounded-md text-white text-xl to-red-400 w-full`} >{resources.SIGNUP.BUTTON_TEXT}</button>
+            <button type="submit" disabled={disableSignupButton} className={`bg-gradient-to-br ${disableSignupButton ? "disabled-button" : "from-pink-500"} py-3 rounded-md text-white text-xl to-red-400 w-full`} ><FontAwesomeIcon ref={submitIconRef} style={{display:"none"}} className="spinner" icon={faSpinner} /> {resources.SIGNUP.BUTTON_TEXT}</button>
             <div className="text-center mt-5 space-x-2">
                 <p className="text-base"> {resources.SIGNUP.HAS_ACCOUNT} <a href="form-login.html"> {resources.SIGNUP.SIGNIN_ACCOUNT} </a></p>
             </div>
-        </form></>)
+        </form>
+    </>)
 
 }
 

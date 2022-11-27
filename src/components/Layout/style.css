@@ -64,7 +64,7 @@
   background: #1f2937 !important;
 }
 
-.dark p {
+.dark #wrapper p {
   color: #a9a8a8 !important;
 }
 
@@ -3104,10 +3104,6 @@ header .uk-dropdown {
   background: blue;
 }
 
-.txt-condition {
-  font-size: 14px;
-  padding-top: 1.5px;
-}
 
 input::placeholder {
   font-family: 'Shabnam';
@@ -3133,6 +3129,60 @@ input::placeholder {
 
 .disabled-button{
     cursor: no-drop;
+    background: #bcbaba !important;
+    color: #6c6f7f !important;
+}
+
+.dark .disabled-button{
+    cursor: no-drop;
     background: #363a50 !important;
     color: #6a708e !important;
 }
+
+.justify-text{
+  text-align:justify;
+}
+
+.uk-offcanvas .ul-condition {
+  color: #7d61fd !important;
+}
+
+.uk-offcanvas ul {
+  list-style: inside;
+  color: #666;
+}
+
+.dark .uk-offcanvas ul {
+  list-style: inside;
+  color: #cfdadf;
+}
+
+.dark .uk-offcanvas p {
+  list-style: inside;
+  color: #cfdadf;
+}
+
+.condition-title{
+  color: #e91e63 !important;
+}
+
+.rule-tag {
+    color: #be185d;
+    cursor: pointer;
+    font-size: 14px;
+    padding-top: 1.5px;
+}
+
+.spinner {
+  animation: spin infinite 1s linear;
+}
+
+@keyframes spin {
+from {
+  transform: rotate(0deg);
+}
+to {
+  transform: rotate(360deg);
+}
+}
+

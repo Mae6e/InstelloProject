@@ -1,6 +1,9 @@
-import React from "react"
+import React, { useState , useRef } from "react"
 import { resources } from "../../resource"
 import useNightMode from "../../hooks/night-mode"
+import OffCanvas from "../UI/OffCanvas/OffCanvas"
+import Signup from "../../containers/Signup/Signup"
+import SignupRole from "../UI/SignupRule/SignupRule"
 
 import { ReactNotifications } from 'react-notifications-component'
 
@@ -11,9 +14,34 @@ import './icons.css'
 const InitLayout = (props) => {
 
     const [nightMode, toggleNightMode] = useNightMode()
+    const [showOffCanvas, setShowOffCanvas] = useState(false)
+    const [confirmRule, setConfirmRule] = useState(false)
+
+    const offcanvasRef = useRef()
 
 
-    return (<div className="bg-gray-100 init-layout">
+    const onShowCanvasPageHandler = () => {
+        setShowOffCanvas(true)
+        // document.body.style.overflowY = "hidden"
+    }
+
+    const onHideCanvasPageHandler = () => {
+        offcanvasRef.current.classList.add('animate__animated')
+        offcanvasRef.current.classList.add('animate__fadeOutRight')  
+        setTimeout(() => {
+            if (showOffCanvas) {
+                setShowOffCanvas(false)
+                // document.body.style.overflowY = "auto"
+            }
+        }, 500);
+    }
+
+    const onConfirmRuleHandler = () => {
+        setConfirmRule(true);
+        onHideCanvasPageHandler();
+    }
+
+    return (<div className="bg-gray-100 init-layout" >
         <div id="wrapper" className="flex flex-col justify-between h-screen">
             <div className="bg-white py-4 shadow dark:bg-gray-800">
                 <div className="max-w-6xl mx-auto">
@@ -21,7 +49,7 @@ const InitLayout = (props) => {
 
                         <a href="trending.html">
                             <img src="assets/images/logo.png" className="w-32 logo_dark" alt="" />
-                            <img src="assets/images/logo-light.png" className="w-32 logo_light" />
+                            <img src="assets/images/logo-light.png" className="w-32 logo_light" alt="" />
                         </a>
 
                         <div className="capitalize flex font-semibold hidden lg:block my-2 space-x-3 text-center text-sm">
@@ -37,10 +65,9 @@ const InitLayout = (props) => {
                 <ReactNotifications />
 
                 <div className="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-">
-                    {props.children}
+                    <Signup confirmRule={confirmRule} onShowCanvasPage={onShowCanvasPageHandler} ></Signup>
                 </div>
             </div>
-
 
             <div className="flex justify-center items-center">
                 <label htmlFor="night-light-checkbox" className="night-light-label">
@@ -73,10 +100,14 @@ const InitLayout = (props) => {
                     </p>
                 </div>
             </div>
-
         </div>
+       
+        <OffCanvas ref={offcanvasRef} title={resources.SIGNUP.TERMS_AND_CONDITIONS} isShow={showOffCanvas} onHide={onHideCanvasPageHandler} >
+            <SignupRole onConfirmRule={onConfirmRuleHandler} ></SignupRole>
+        </OffCanvas>
     </div>
     )
+
 }
 
 export default InitLayout
