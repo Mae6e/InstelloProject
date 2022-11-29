@@ -25,7 +25,8 @@ export const resources = {
     INPUT_MIN_EMAIL: "حداقل تعداد کاراکتر 5 می باشد",
     INPUT_MIN_PASSWORD: "حداقل تعداد کاراکتر 5 می باشد",
     SUCCESS_SIGNIN: "ورود با موفقیت انجام شد",
-    ERROR_SIGNIN: "ایمیل یا کلمه عبور نادرست می باشد"
+    ERROR_SIGNIN: "ایمیل یا کلمه عبور نادرست می باشد",
+    VERIFICATIONSTEP:"کد ارسال شده به ایمیل را جهت تأیید وارد کنید"
   },
   SIGNUP: {
     HEADING_SIGNUP: "ثبت نام",

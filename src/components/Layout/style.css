@@ -38,9 +38,9 @@
 @font-face {
   font-family: 'Shabnam';
   src:
-    url('../../../public/fonts/Shabnam-FD.eot'),
-    url('../../../public/fonts/Shabnam-FD.ttf'),
-    url('../../../public/fonts/Shabnam-FD.woff')
+    url('../../../src/fonts/Shabnam-FD.eot'),
+    url('../../../src/fonts/Shabnam-FD.ttf'),
+    url('../../../src/fonts/Shabnam-FD.woff')
 }
 
 
@@ -704,7 +704,8 @@ input {
 input[type="text"],
 input[type="password"],
 input[type="email"],
-input[type="number"] {
+input[type="number"],
+input[type="tel"] {
   height: 48px;
   line-height: 48px;
   padding: 0 20px;
@@ -722,20 +723,23 @@ input[type="number"] {
   border: none;
   -webkit-box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.12);
   box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.12);
+  font-family: inherit !important;
 }
 
  .dark .init-layout input[type="text"],
  .dark .init-layout input[type="password"],
  .dark .init-layout input[type="email"],
- .dark .init-layout input[type="number"] {
-  border: 1px solid #485567 !important;
+ .dark .init-layout input[type="number"],
+ .dark .init-layout input[type="tel"]{
+  border: 0.5px solid #485567 !important;
   background: #111827 !important;
 }
 
 .dark input[type="text"],
 .dark input[type="password"],
 .dark input[type="email"],
-.dark input[type="number"] {
+.dark input[type="number"],
+.dark .init-layout input[type="tel"]  {
   color: #b8b6b6 !important;
 }
 
@@ -3186,3 +3190,25 @@ to {
 }
 }
 
+input[type="tel"] {
+  float:left;
+}
+
+.box-name div{
+  width:100%;
+}
+
+.loading{
+  width: 100%;
+    height:100%;
+    position: absolute;
+    /* display: none; */
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    background-color: transparent;
+    right: 0;
+    /* height:100%; */
+    /* bottom: 0; */
+    /* top:0; */
+}

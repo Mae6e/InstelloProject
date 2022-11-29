@@ -15,7 +15,9 @@ const NotificationProvider = (message, type) => {
     Store.removeAllNotifications()
     Store.addNotification({
         content: <Notification message={message} type={type} />,
-        onRemoval: () => { },
+        onRemoval: (id, removedBy) => {
+          //console.log("removed")
+         },
         title: "error",
         container: "top-center",
         animationIn: ["animate__animated animate__fadeIn"], 

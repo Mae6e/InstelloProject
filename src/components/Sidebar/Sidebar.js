@@ -2,18 +2,21 @@ import React from "react"
 import CustomScrollbar from "../UI/CustomScrollbar/CustomScrollbar"
 import useNightMode from "../../hooks/night-mode"
 import { resources } from "../../resource"
+import logo from "../../assets/images/logo.png"
+import lightLogo from "../../assets/images/logo-light.png"
 
+////
+import avator from "../../assets/images/avatars/avatar-2.jpg"
 
 const Sidebar = (props) => {
-
 
     const [nightMode,toggleNightMode] = useNightMode()
 
     return <div className="sidebar" onClick={props.sidebarClick}>
         <div className="sidebar_header border-b border-gray-200 from-gray-100 to-gray-50 bg-gradient-to-t  uk-visible@s">
             <a href="profile.html#">
-                <img src="assets/images/logo.png" />
-                <img src="assets/images/logo-light.png" className="logo_inverse" />
+                <img src={logo} alt="" />
+                <img src={lightLogo} className="logo_inverse" alt="" />
             </a>
             <span onClick={toggleNightMode} id="night-mode" className="btn-night-mode" data-tippy-placement="left" title={resources.HEADER.SWITCHTONIGHTMOODE} ></span>
         </div>
@@ -26,7 +29,7 @@ const Sidebar = (props) => {
             <div className="sidebar_inner" data-simplebar >
                 <div className="flex flex-col items-center my-6 uk-visible@s">
                     <div className="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transition m-0.5 ml-2  w-24 h-24">
-                        <img src="assets/images/avatars/avatar-2.jpg" className="bg-gray-200 border-4 border-white rounded-full w-full h-full"></img>
+                        <img src={avator} className="bg-gray-200 border-4 border-white rounded-full w-full h-full" alt=""></img>
                     </div>
                     <a href="profile.html" className="text-xl font-medium capitalize mt-4 uk-link-reset"> Stella Johnson
                     </a>

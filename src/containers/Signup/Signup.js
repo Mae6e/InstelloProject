@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import {Link , useNavigate} from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup"
 import { resources } from "../../resource";
@@ -6,20 +7,21 @@ import SignupAPI from "../../api/SignupAPI"
 import NotificationProvider from "../../components/UI/Notification/Notification";
 import TextInput from "../../components/UI/TextInput/TextInput ";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const Signup = (props) => {
 
     const checkboxRef = useRef()
-    const submitIconRef = useRef()
+    //const submitIconRef = useRef()
+    const navigate = useNavigate()
 
-    const [disableSignupButton, setSignupButton] = useState(true);
+    const [disableSignupButton, setDisableSignupButton] = useState(true);
 
     useEffect(() => {
         if (props.confirmRule) {
             checkboxRef.current.checked = props.confirmRule
-            setSignupButton(false)
+            setDisableSignupButton(false)
         }
     }, [props.confirmRule])
 
@@ -47,26 +49,34 @@ const Signup = (props) => {
         }),
         onSubmit: (values ,{resetForm}) => {
 
-            submitIconRef.current.style.display ="var(--fa-display, inline-block)"
-            SignupAPI({ id: CreateUUID(), ...values }).then((response) => {
-                setSignupButton(false)
-                NotificationProvider(response.message, response.type)
-                if(response.isSuccess)
-                resetForm()
-               submitIconRef.current.style.display ="none";
+            //submitIconRef.current.style.display ="var(--fa-display, inline-block)"
+            //setDisableSignupButton(true)
+            props.onShowLoading()
 
+            SignupAPI({ id: CreateUUID(), ...values }).then((response) => {
+
+                NotificationProvider(response.message, response.type)
+                //submitIconRef.current.style.display ="none";
+                //setDisableSignupButton(false)
+                props.onHideLoading()
+
+                if(!response.isSuccess)
+                resetForm()
+                else
+                return navigate("/")
             })
         }
     })
 
     const confirmConditionHandler = () => {
-        setSignupButton(!disableSignupButton)
+        props.onConfirmRule(!disableSignupButton)
+        setDisableSignupButton(!disableSignupButton)
     }
 
     return (<><h1 className="lg:text-3xl text-xl font-semibold mb-6">{resources.SIGNUP.HEADING_SIGNUP}</h1>
         <p className="mb-2 text-black text-lg">{resources.SIGNUP.INFO_SIGNUP}</p>
         <form action="form-register.html" onSubmit={formik.handleSubmit}>
-            <div className="flex lg:flex-row flex-col lg:space-x-2">
+            <div className="flex lg:flex-row flex-col lg:space-x-2 box-name">
                 <div>
                     <input type="text" name="firstname" id="firstname" value={formik.values.firstname} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder={resources.SIGNUP.INPUT_FIRSTNAME} className="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style={{ border: "1px solid #d3d5d8" }} autoComplete="off" />
                     {formik.touched.firstname && formik.errors.firstname ? <span className='error-message'>{formik.errors.firstname}</span> : null}
@@ -96,9 +106,11 @@ const Signup = (props) => {
                 </div>
                 <span onClick={props.onShowCanvasPage} className="rule-tag"> <span>{resources.SIGNUP.TERMS_AND_CONDITIONS}</span></span>
             </div>
-            <button type="submit" disabled={disableSignupButton} className={`bg-gradient-to-br ${disableSignupButton ? "disabled-button" : "from-pink-500"} py-3 rounded-md text-white text-xl to-red-400 w-full`} ><FontAwesomeIcon ref={submitIconRef} style={{display:"none"}} className="spinner" icon={faSpinner} /> {resources.SIGNUP.BUTTON_TEXT}</button>
+            <button type="submit" disabled={disableSignupButton} className={`bg-gradient-to-br ${disableSignupButton ? "disabled-button" : "from-pink-500"} py-3 rounded-md text-white text-xl to-red-400 w-full`} >
+                {/* <FontAwesomeIcon ref={submitIconRef} style={{display:"none"}} className="spinner" icon={faSpinner} />  */}
+                {resources.SIGNUP.BUTTON_TEXT}</button>
             <div className="text-center mt-5 space-x-2">
-                <p className="text-base"> {resources.SIGNUP.HAS_ACCOUNT} <a href="form-login.html"> {resources.SIGNUP.SIGNIN_ACCOUNT} </a></p>
+                <p className="text-base"> {resources.SIGNUP.HAS_ACCOUNT} <Link to="/" > {resources.SIGNUP.SIGNIN_ACCOUNT} </Link></p>
             </div>
         </form>
     </>)

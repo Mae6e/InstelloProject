@@ -2,26 +2,30 @@ import React from "react"
 import CustomSrollbar from '../UI/CustomScrollbar/CustomScrollbar'
 import  {resources} from "../../resource"
 
+import logo from "../../assets/images/logo-mobile.png"
+import lightLogo from "../../assets/images/logo-mobile-light.png"
+
+////
+import avator from "../../assets/images/avatars/avatar-2.jpg"
+
 const Header = (props) => {
 
     const profileHandler = (key) => {
         props.headerClick(key)
     }
 
-    let showProfile = null;
-    let showMessage = null;
-    let showNotification = null;
+    let showContent = null;
 
-    if (props.showHeaderItems.isShowProfile) {
-        showProfile = <div uk-drop="mode: click;offset:9" className="header_dropdown profile_dropdown border-t uk-drop uk-open" style={{ left: "2%", top: "1.5%" }}>
+    let content = {
+        showProfile:
+        <div uk-drop="mode: click;offset:9" className="header_dropdown profile_dropdown border-t uk-drop uk-open" style={{ left: "2%", top: "1.5%" }}>
             <ul>
                 <li><a href="#"> {resources.HEADER.ACCOUNT_SETTING} </a> </li>
                 <li><a href="form-login.html"> {resources.HEADER.LOGOUT}</a></li>
             </ul>
-        </div>
-    }
-    else if (props.showHeaderItems.isShowMessage) {
-        showMessage = <div uk-drop="mode: click;offset: 4" className="header_dropdown uk-drop uk-open" style={{ left: "4%", top: "1.5%" }}>
+        </div>,
+        showMessage :
+        <div uk-drop="mode: click;offset: 4" className="header_dropdown uk-drop uk-open" style={{ left: "4%", top: "1.5%" }}>
             <h4
                 className="-mt-5 -mx-5 bg-gradient-to-t from-gray-100 to-gray-50 border-b font-bold px-6 py-3">
                 {resources.HEADER.MESSAGES} </h4>
@@ -30,7 +34,7 @@ const Header = (props) => {
                     <ul className="dropdown_scrollbar" data-simplebar>
                         <li>
                             <a href="trending.html#">
-                                <div className="drop_avatar"> <img src="assets/images/avatars/avatar-1.jpg" alt="" />
+                                <div className="drop_avatar"> <img src={avator} alt="" />
                                 </div>
                                 <div className="drop_content">
                                     <strong> John menathon </strong> <time> 6:43 PM</time>
@@ -40,7 +44,7 @@ const Header = (props) => {
                         </li>
                         <li>
                             <a href="trending.html#">
-                                <div className="drop_avatar"> <img src="assets/images/avatars/avatar-2.jpg" alt="" />
+                                <div className="drop_avatar"> <img src={avator} alt="" />
                                 </div>
                                 <div className="drop_content">
                                     <strong> Zara Ali </strong> <time>12:43 PM</time>
@@ -50,7 +54,7 @@ const Header = (props) => {
                         </li>
                         <li>
                             <a href="trending.html#">
-                                <div className="drop_avatar"> <img src="assets/images/avatars/avatar-3.jpg" alt="" />
+                                <div className="drop_avatar"> <img src={avator} alt="" />
                                 </div>
                                 <div className="drop_content">
                                     <strong> Mohamed Ali </strong> <time> Wed </time>
@@ -60,7 +64,7 @@ const Header = (props) => {
                         </li>
                         <li>
                             <a href="trending.html#">
-                                <div className="drop_avatar"> <img src="assets/images/avatars/avatar-1.jpg" alt="" />
+                                <div className="drop_avatar"> <img src={avator} alt="" />
                                 </div>
                                 <div className="drop_content">
                                     <strong> John menathon </strong> <time> Sun</time>
@@ -70,7 +74,7 @@ const Header = (props) => {
                         </li>
                         <li>
                             <a href="trending.html#">
-                                <div className="drop_avatar"> <img src="assets/images/avatars/avatar-2.jpg" alt="" />
+                                <div className="drop_avatar"> <img src={avator} alt="" />
                                 </div>
                                 <div className="drop_content">
                                     <strong> Zara Ali </strong> <time> Fri</time>
@@ -80,7 +84,7 @@ const Header = (props) => {
                         </li>
                         <li>
                             <a href="trending.html#">
-                                <div className="drop_avatar"> <img src="assets/images/avatars/avatar-3.jpg" alt="" />
+                                <div className="drop_avatar"> <img src={avator} alt="" />
                                 </div>
                                 <div className="drop_content">
                                     <strong> Mohamed Ali </strong> <time>1 Week ago</time>
@@ -92,10 +96,9 @@ const Header = (props) => {
                 </CustomSrollbar>
             </div>
             <a href="trending.html#" className="see-all">{resources.HEADER.SEEALL}</a>
-        </div>
-    }
-    else if (props.showHeaderItems.isShowNotification) {
-        showNotification = <div uk-drop="mode: click;offset: 4" className="header_dropdown uk-drop uk-open" style={{ left: "6%", top: "1.5%" }}>
+        </div>,
+        showNotification:
+        <div uk-drop="mode: click;offset: 4" className="header_dropdown uk-drop uk-open" style={{ left: "6%", top: "1.5%" }}>
             <h4
                 className="-mt-5 -mx-5 bg-gradient-to-t from-gray-100 to-gray-50 border-b font-bold px-6 py-3">
                 {resources.HEADER.NOTIFICATION} </h4>
@@ -104,7 +107,7 @@ const Header = (props) => {
                     <ul className="dropdown_scrollbar" data-simplebar>
                         <li>
                             <a href="trending.html#">
-                                <div className="drop_avatar"> <img src="assets/images/avatars/avatar-1.jpg" alt="" />
+                                <div className="drop_avatar"> <img src={avator} alt="" />
                                 </div>
                                 <div className="drop_content">
                                     <p> <strong>Adrian Mohani</strong>  Lorem ipsum dolor cursus
@@ -116,7 +119,7 @@ const Header = (props) => {
                         </li>
                         <li>
                             <a href="trending.html#">
-                                <div className="drop_avatar"> <img src="assets/images/avatars/avatar-2.jpg" alt="" />
+                                <div className="drop_avatar"> <img src={avator} alt="" />
                                 </div>
                                 <div className="drop_content">
                                     <p>
@@ -129,7 +132,7 @@ const Header = (props) => {
                         </li>
                         <li>
                             <a href="trending.html#">
-                                <div className="drop_avatar"> <img src="assets/images/avatars/avatar-3.jpg" alt="" />
+                                <div className="drop_avatar"> <img src={avator} alt="" />
                                 </div>
                                 <div className="drop_content">
                                     <p>
@@ -142,7 +145,7 @@ const Header = (props) => {
                         </li>
                         <li>
                             <a href="trending.html#">
-                                <div className="drop_avatar"> <img src="assets/images/avatars/avatar-1.jpg" alt="" />
+                                <div className="drop_avatar"> <img src={avator} alt="" />
                                 </div>
                                 <div className="drop_content">
                                     <p>
@@ -155,7 +158,7 @@ const Header = (props) => {
                         </li>
                         <li>
                             <a href="trending.html#">
-                                <div className="drop_avatar"> <img src="assets/images/avatars/avatar-3.jpg" alt="" />
+                                <div className="drop_avatar"> <img src={avator} alt="" />
                                 </div>
                                 <div className="drop_content">
                                     <p>
@@ -173,13 +176,23 @@ const Header = (props) => {
         </div>
     }
 
+    if (props.showHeaderItems.isShowProfile) {
+        showContent = content["showProfile"]
+    }
+    else if (props.showHeaderItems.isShowMessage) {
+        showContent = content["showMessage"]
+    }
+    else if (props.showHeaderItems.isShowNotification) {
+        showContent = content["showNotification"]
+    }
+
     return (<header>
         <div className="header_inner">
             <div className="right-side">
                 <div id="logo" className=" uk-hidden@s">
                     <a href="http://demo.foxthemes.net/instellohtml/home.html">
-                        <img src="assets/images/logo-mobile.png" alt="" />
-                        <img src="assets/images/logo-mobile-light.png" className="logo_inverse" />
+                        <img src={logo} alt="" />
+                        <img src={lightLogo} className="logo_inverse" />
                     </a>
                 </div>
 
@@ -263,7 +276,7 @@ const Header = (props) => {
                             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                     </svg>
                 </a>
-                {showNotification}
+                {showContent}
 
                 <a href="#" className="header-links-item" onClick={()=>profileHandler('isShowMessage')} >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -272,12 +285,12 @@ const Header = (props) => {
                             d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                     </svg>
                 </a>
-                {showMessage}
+                {showContent}
 
                 <a href="#" onClick={()=>profileHandler('isShowProfile')}>
-                    <img src="assets/images/avatars/avatar-2.jpg" className="header-avatar" alt="" />
+                    <img src={avator} className="header-avatar" alt="" />
                 </a>
-                {showProfile}
+                {showContent}
 
             </div>
         </div>

@@ -1,11 +1,16 @@
-import React, { useState , useRef } from "react"
+import React, { useState, useRef } from "react"
 import { resources } from "../../resource"
+import { Route, Routes,Link } from "react-router-dom"
 import useNightMode from "../../hooks/night-mode"
 import OffCanvas from "../UI/OffCanvas/OffCanvas"
 import Signup from "../../containers/Signup/Signup"
+import Signin from "../../containers/Signin/Signin"
 import SignupRole from "../UI/SignupRule/SignupRule"
 
 import { ReactNotifications } from 'react-notifications-component'
+import logo from "../../assets/images/logo.png"
+import lightLogo from "../../assets/images/logo-light.png"
+import Loading from "../UI/Loading/Loading"
 
 import './style.css'
 import './tailwind.css'
@@ -16,6 +21,7 @@ const InitLayout = (props) => {
     const [nightMode, toggleNightMode] = useNightMode()
     const [showOffCanvas, setShowOffCanvas] = useState(false)
     const [confirmRule, setConfirmRule] = useState(false)
+    const [isLoading, setLoading] = useState(false)
 
     const offcanvasRef = useRef()
 
@@ -25,9 +31,17 @@ const InitLayout = (props) => {
         // document.body.style.overflowY = "hidden"
     }
 
+    const showLoadingHandler =()=>{
+        setLoading(true)
+    }
+
+    const hideLoadingHandler =()=>{
+        setLoading(false)
+    }
+
     const onHideCanvasPageHandler = () => {
         offcanvasRef.current.classList.add('animate__animated')
-        offcanvasRef.current.classList.add('animate__fadeOutRight')  
+        offcanvasRef.current.classList.add('animate__fadeOutRight')
         setTimeout(() => {
             if (showOffCanvas) {
                 setShowOffCanvas(false)
@@ -47,25 +61,28 @@ const InitLayout = (props) => {
                 <div className="max-w-6xl mx-auto">
                     <div className="flex items-center lg:justify-between justify-around">
 
-                        <a href="trending.html">
-                            <img src="assets/images/logo.png" className="w-32 logo_dark" alt="" />
-                            <img src="assets/images/logo-light.png" className="w-32 logo_light" alt="" />
-                        </a>
+                        <Link to="/">
+                            <img src={logo} className="w-32 logo_dark" alt="" />
+                            <img src={lightLogo} className="w-32 logo_light" alt="" />
+                        </Link>
 
                         <div className="capitalize flex font-semibold hidden lg:block my-2 space-x-3 text-center text-sm">
-                            <a href="form-login.html" className="py-3 px-4">{resources.INITlAYOUT.BUTTON_SIGNIN}</a>
-                            <a href="form-register.html" className="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">{resources.INITlAYOUT.BUTTON_SIGNUP}</a>
+                            <Link to="/" className="py-3 px-4">{resources.INITlAYOUT.BUTTON_SIGNIN}</Link>
+                            <Link to="/Signup" className="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">{resources.INITlAYOUT.BUTTON_SIGNUP}</Link>
                         </div>
 
                     </div>
                 </div>
             </div>
 
-            <div>
+            <div style={{position:"relative"}}>
                 <ReactNotifications />
-
+                <Loading style={isLoading?{display:"flex"}:{display:"none"}} />
                 <div className="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-">
-                    <Signup confirmRule={confirmRule} onShowCanvasPage={onShowCanvasPageHandler} ></Signup>
+                    <Routes>
+                        <Route path="/Signup" element={<Signup confirmRule={confirmRule} onConfirmRule={()=>setConfirmRule(!confirmRule)} onShowCanvasPage={onShowCanvasPageHandler} onShowLoading ={showLoadingHandler} onHideLoading={hideLoadingHandler} ></Signup>} />
+                        <Route path="/" element={<Signin onShowLoading ={showLoadingHandler} onHideLoading={hideLoadingHandler}></Signin>} />
+                    </Routes>
                 </div>
             </div>
 
@@ -84,15 +101,15 @@ const InitLayout = (props) => {
                 </label>
             </div>
 
-            <br></br>
+    
 
             <div className="lg:mb-5 py-3 uk-link-reset">
                 <div className="flex flex-col items-center justify-between lg:flex-row max-w-6xl mx-auto lg:space-y-0 space-y-3">
                     <div className="flex space-x-2 text-gray-700 uppercase">
-                        <a href="form-login.html#"> {resources.INITlAYOUT.ABOUT} &nbsp;</a>
-                        <a href="form-login.html#"> {resources.INITlAYOUT.HELP}</a>
-                        <a href="form-login.html#"> {resources.INITlAYOUT.TERMS}</a>
-                        <a href="form-login.html#"> {resources.INITlAYOUT.PRIVACY}</a>
+                        <Link to="/"> {resources.INITlAYOUT.ABOUT} &nbsp;</Link>
+                        <Link to="/"> {resources.INITlAYOUT.HELP}</Link>
+                        <Link to="/"> {resources.INITlAYOUT.TERMS}</Link>
+                        <Link to="/"> {resources.INITlAYOUT.PRIVACY}</Link>
                     </div>
                     <p className="capitalize">
                         <span> {resources.INITlAYOUT.DEVELOP}</span>
@@ -101,7 +118,7 @@ const InitLayout = (props) => {
                 </div>
             </div>
         </div>
-       
+
         <OffCanvas ref={offcanvasRef} title={resources.SIGNUP.TERMS_AND_CONDITIONS} isShow={showOffCanvas} onHide={onHideCanvasPageHandler} >
             <SignupRole onConfirmRule={onConfirmRuleHandler} ></SignupRole>
         </OffCanvas>
