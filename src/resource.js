@@ -7,7 +7,10 @@ export const resources = {
     SEARCH: "جستجو..",
     SEEALL: "نمایش همه",
     ACCOUNT_SETTING: "تنظیمات حساب کاربری",
-    LOGOUT: "خروج"
+    LOGOUT: "خروج",
+    NOTEXISTMESSAGE :"صندوق پیام های شما خالی هس",
+    NOTEXISTNOTIFICATION :"صندوق اعلان های شما خالی هس"
+
   },
   SIGNIN: {
     HEADING_SIGNIN: "ورود",

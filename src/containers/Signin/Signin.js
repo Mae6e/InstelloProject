@@ -13,6 +13,7 @@ const Signin = (props) => {
 
     const authContext = useContext(AuthContext)
     const [isActiveVerificationStep, setActiveVerificationStep] = useState(false)
+    const [user, setUser]= useState()
 
     const formik = useFormik({
         initialValues: {
@@ -20,7 +21,6 @@ const Signin = (props) => {
             password: ''
         },
         validationSchema: Yup.object({
-
             email: Yup.string().required(resources.SIGNIN.INPUT_REQUIRED_EMAIL)
                 .max(255, resources.SIGNIN.INPUT_MAX_EMAIL)
                 .min(5, resources.SIGNIN.INPUT_MIN_EMAIL),
@@ -28,13 +28,11 @@ const Signin = (props) => {
             password: Yup.string().required(resources.SIGNIN.INPUT_REQUIRED_PASSWORD)
                 .max(32, resources.SIGNIN.INPUT_MAX_PASSWORD)
                 .min(5, resources.SIGNIN.INPUT_MIN_PASSWORD)
-
         }),
         onSubmit: (values) => {
-            const user = { email: values.email, password: values.password };
             props.onShowLoading()
 
-            authContext.onAuthentication(user)
+            authContext.onAuthentication({ email: values.email, password: values.password })
                 .then((response) => {
                     if (!response.isSuccess) {
                         NotificationProvider(response.message, response.type)
@@ -42,13 +40,14 @@ const Signin = (props) => {
                     }
                     else {
                         setActiveVerificationStep(true)
+                        setUser(response.entity)
                         props.onHideLoading()
                     }
                 })
         }
     })
 
-    const onCompleteHandler = (user) => {
+    const onCompleteHandler = () => {
         props.onShowLoading()
         setTimeout(() => {
             authContext.setAuthentication(user)

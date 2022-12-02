@@ -14,7 +14,7 @@ const SignupAPI = async (user) => {
         })
         .catch((error) => {
             console.log(error);
-            jsonData = { isSuccess: false, message: error, type: "danger" }
+            jsonData = { isSuccess: false, message: "error", type: "danger" }
         })
     return jsonData
 }

@@ -6,7 +6,7 @@ const SigninAPI = async (user) => {
     await Axios.get(`/users?email=${user.email}&&password=${user.password}`)
         .then((response) => {
             if (response.status === 200 && response.data.length > 0) {
-                jsonData = { isSuccess: true, message: resources.SIGNIN.SUCCESS_SIGNIN, type: "success" }
+                jsonData = { isSuccess: true, message: resources.SIGNIN.SUCCESS_SIGNIN, type: "success" , entity:response.data[0] }
             }
             else {
                 jsonData = { isSuccess: false, message: resources.SIGNIN.ERROR_SIGNIN, type: "danger" }
@@ -14,7 +14,7 @@ const SigninAPI = async (user) => {
         })
         .catch((error) => {
             console.log(error);
-            jsonData = { isSuccess: false, message: error, type: "danger" }
+            jsonData = { isSuccess: false, message: "error", type: "danger" }
         })
     return jsonData
 }

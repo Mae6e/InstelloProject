@@ -1,6 +1,8 @@
-import React, { useState } from "react"
+import React, { useState , useEffect } from "react"
 import Sidebar from "../Sidebar/Sidebar"
 import Header from "../Header/Header"
+import Loading from "../UI/Loading/Loading"
+import { GetUserInfo } from "../../api/ProfileAPI"
 
 import './icons.css'
 import './uikit.css'
@@ -10,6 +12,22 @@ import './tailwind.css'
 const Layout = () => {
 
     const [isToggle, setToggle] = useState(false)
+    const [isLoading, setLoading] = useState(true)
+    const [user, setUser] = useState({})
+
+    useEffect(() => {
+        GetUserInfo().then((response) => {
+            if (response.isSuccess) {
+                setUser(response.entity)
+            }
+            hideLoadingHandler()
+        })
+    }, [])
+
+    const hideLoadingHandler =()=>{
+        console.log(user)
+        setLoading(false)
+    }
 
     const [showHeaderItems, setHeaderItems] = useState(
         {
@@ -50,9 +68,10 @@ const Layout = () => {
     }
 
     return (<div id="wrapper" className={`${isToggle ? 'sidebar-active' : ''}`} >
-        <Sidebar toggleClick={toggleHandler} sidebarClick={() => { headerHandler(null) }} />
+        <Loading className='loading-main' style={isLoading?{display:"flex"}:{display:"none"}} />
+        <Sidebar currentUser={user} toggleClick={toggleHandler} sidebarClick={() => { headerHandler(null) }}  />
         <div className="main_content">
-            <Header toggleClick={toggleHandler} showHeaderItems={showHeaderItems} headerClick={(currentKey) => headerHandler(currentKey)} >
+            <Header currentUser={user} toggleClick={toggleHandler} showHeaderItems={showHeaderItems} headerClick={(currentKey) => headerHandler(currentKey)} >
             </Header>
             <div className="container pro-container m-auto" onClick={contentHandler}>
                 <div className="flex lg:flex-row flex-col items-center lg:py-8 lg:space-x-8"><span>dd</span>

@@ -1,12 +1,11 @@
 import React from "react"
-import CustomSrollbar from '../UI/CustomScrollbar/CustomScrollbar'
-import  {resources} from "../../resource"
+import { resources } from "../../resource"
+import NotificationBox from "../NotificationBox/NotificationBox"
 
 import logo from "../../assets/images/logo-mobile.png"
 import lightLogo from "../../assets/images/logo-mobile-light.png"
-
-////
-import avator from "../../assets/images/avatars/avatar-2.jpg"
+import MessageBox from "../MessageBox/MessageBox"
+import avator from "../../assets/images/avatars/blank-profile.webp"
 
 const Header = (props) => {
 
@@ -14,176 +13,16 @@ const Header = (props) => {
         props.headerClick(key)
     }
 
-    let showContent = null;
-
     let content = {
-        showProfile:
-        <div uk-drop="mode: click;offset:9" className="header_dropdown profile_dropdown border-t uk-drop uk-open" style={{ left: "2%", top: "1.5%" }}>
-            <ul>
-                <li><a href="#"> {resources.HEADER.ACCOUNT_SETTING} </a> </li>
-                <li><a href="form-login.html"> {resources.HEADER.LOGOUT}</a></li>
-            </ul>
-        </div>,
-        showMessage :
-        <div uk-drop="mode: click;offset: 4" className="header_dropdown uk-drop uk-open" style={{ left: "4%", top: "1.5%" }}>
-            <h4
-                className="-mt-5 -mx-5 bg-gradient-to-t from-gray-100 to-gray-50 border-b font-bold px-6 py-3">
-                {resources.HEADER.MESSAGES} </h4>
-            <div className="message-box">
-                <CustomSrollbar>
-                    <ul className="dropdown_scrollbar" data-simplebar>
-                        <li>
-                            <a href="trending.html#">
-                                <div className="drop_avatar"> <img src={avator} alt="" />
-                                </div>
-                                <div className="drop_content">
-                                    <strong> John menathon </strong> <time> 6:43 PM</time>
-                                    <p> Lorem ipsum dolor sit amet, consectetur </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="trending.html#">
-                                <div className="drop_avatar"> <img src={avator} alt="" />
-                                </div>
-                                <div className="drop_content">
-                                    <strong> Zara Ali </strong> <time>12:43 PM</time>
-                                    <p>  Sediam nonummy nibh euismod tincidunt laoreet dolore  </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="trending.html#">
-                                <div className="drop_avatar"> <img src={avator} alt="" />
-                                </div>
-                                <div className="drop_content">
-                                    <strong> Mohamed Ali </strong> <time> Wed </time>
-                                    <p> Lorem ipsum dolor sit amet, consectetur </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="trending.html#">
-                                <div className="drop_avatar"> <img src={avator} alt="" />
-                                </div>
-                                <div className="drop_content">
-                                    <strong> John menathon </strong> <time> Sun</time>
-                                    <p> Namliber tempor cumsoluta nobis eleifend option adipiscing </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="trending.html#">
-                                <div className="drop_avatar"> <img src={avator} alt="" />
-                                </div>
-                                <div className="drop_content">
-                                    <strong> Zara Ali </strong> <time> Fri</time>
-                                    <p> Lorem ipsum dolor sit amet, consectetur </p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="trending.html#">
-                                <div className="drop_avatar"> <img src={avator} alt="" />
-                                </div>
-                                <div className="drop_content">
-                                    <strong> Mohamed Ali </strong> <time>1 Week ago</time>
-                                    <p>  Sediam nonummy nibh euismod tincidunt laoreet dolore  </p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </CustomSrollbar>
-            </div>
-            <a href="trending.html#" className="see-all">{resources.HEADER.SEEALL}</a>
-        </div>,
-        showNotification:
-        <div uk-drop="mode: click;offset: 4" className="header_dropdown uk-drop uk-open" style={{ left: "6%", top: "1.5%" }}>
-            <h4
-                className="-mt-5 -mx-5 bg-gradient-to-t from-gray-100 to-gray-50 border-b font-bold px-6 py-3">
-                {resources.HEADER.NOTIFICATION} </h4>
-            <div className="message-box">
-                <CustomSrollbar>
-                    <ul className="dropdown_scrollbar" data-simplebar>
-                        <li>
-                            <a href="trending.html#">
-                                <div className="drop_avatar"> <img src={avator} alt="" />
-                                </div>
-                                <div className="drop_content">
-                                    <p> <strong>Adrian Mohani</strong>  Lorem ipsum dolor cursus
-                                        <span className="text-link"> Adipiscing massa convallis  </span>
-                                    </p>
-                                    <span className="time-ago"> 2 hours ago </span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="trending.html#">
-                                <div className="drop_avatar"> <img src={avator} alt="" />
-                                </div>
-                                <div className="drop_content">
-                                    <p>
-                                        <strong>Stella Johnson</strong> Nonummy nibh euismod
-                                        <span className="text-link"> Imperdiet doming </span>
-                                    </p>
-                                    <span className="time-ago"> 9 hours ago </span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="trending.html#">
-                                <div className="drop_avatar"> <img src={avator} alt="" />
-                                </div>
-                                <div className="drop_content">
-                                    <p>
-                                        <strong>Alex Dolgove</strong>  Lorem ipsum dolor cursus
-                                        <span className="text-link"> Adipiscing massa convallis  </span>
-                                    </p>
-                                    <span className="time-ago"> 12 hours ago </span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="trending.html#">
-                                <div className="drop_avatar"> <img src={avator} alt="" />
-                                </div>
-                                <div className="drop_content">
-                                    <p>
-                                        <strong>Stella Johnson</strong> Nonummy nibh euismod
-                                        <span className="text-link"> Imperdiet doming </span>
-                                    </p>
-                                    <span className="time-ago"> Yesterday </span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="trending.html#">
-                                <div className="drop_avatar"> <img src={avator} alt="" />
-                                </div>
-                                <div className="drop_content">
-                                    <p>
-                                        <strong>Alex Dolgove</strong>  Lorem ipsum dolor cursus
-                                        <span className="text-link"> Adipiscing massa convallis  </span>
-                                    </p>
-                                    <span className="time-ago"> 12 hours ago </span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </CustomSrollbar>
-            </div>
-            <a href="trending.html#" className="see-all">{resources.HEADER.SEEALL}</a>
-        </div>
-    }
-
-    if (props.showHeaderItems.isShowProfile) {
-        showContent = content["showProfile"]
-    }
-    else if (props.showHeaderItems.isShowMessage) {
-        showContent = content["showMessage"]
-    }
-    else if (props.showHeaderItems.isShowNotification) {
-        showContent = content["showNotification"]
+        showProfile: props.showHeaderItems.isShowProfile ?
+            <div uk-drop="mode: click;offset:9" className="header_dropdown profile_dropdown border-t uk-drop uk-open" style={{ left: "2%", top: "1.5%" }}>
+                <ul>
+                    <li><a href="#"> {resources.HEADER.ACCOUNT_SETTING} </a> </li>
+                    <li><a href="form-login.html"> {resources.HEADER.LOGOUT}</a></li>
+                </ul>
+            </div> : null,
+        showMessage: props.showHeaderItems.isShowMessage ? <MessageBox /> : null,
+        showNotification: props.showHeaderItems.isShowNotification ? <NotificationBox /> : null
     }
 
     return (<header>
@@ -269,28 +108,28 @@ const Header = (props) => {
                     </div>
                 </div>
 
-                <a href="#" className="header-links-item" onClick={()=>profileHandler('isShowNotification')} >
+                <button className="header-links-item" onClick={() => profileHandler('isShowNotification')} >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                     </svg>
-                </a>
-                {showContent}
+                </button>
+                {content["showNotification"]}
 
-                <a href="#" className="header-links-item" onClick={()=>profileHandler('isShowMessage')} >
+                <button className="header-links-item" onClick={() => profileHandler('isShowMessage')} >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                             d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                     </svg>
-                </a>
-                {showContent}
+                </button>
+                {content["showMessage"]}
 
-                <a href="#" onClick={()=>profileHandler('isShowProfile')}>
-                    <img src={avator} className="header-avatar" alt="" />
-                </a>
-                {showContent}
+                <button onClick={() => profileHandler('isShowProfile')}>
+                    <img src={props.currentUser.image?? avator} className="header-avatar" alt="" />
+                </button>
+                {content["showProfile"]}
 
             </div>
         </div>
