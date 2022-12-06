@@ -11,12 +11,21 @@ const NotificationBox = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        GetNotifications().then(response => {
-            if (response.isSuccess) {
+
+        const controller = new AbortController();
+        let mounted = true;
+
+        GetNotifications({ signal: controller.signal }).then(response => {
+            if (response.isSuccess && mounted) {
                 setNotifications(response.entity)
+                setIsLoading(false)
             }
-            setIsLoading(false)
         })
+        return () => {
+            controller.abort()
+            mounted = false
+        }
+
     }, [])
 
     const notificationBoxContent = {
@@ -24,7 +33,7 @@ const NotificationBox = () => {
             <ul className="dropdown_scrollbar" data-simplebar>
                 {
                     notifications.map((item) => (
-                        <li>
+                        <li key={item.id}>
                             <a href="trending.html#">
                                 <div className="drop_avatar"> <img src={item.image?? avator} alt="" />
                                 </div>

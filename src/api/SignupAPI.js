@@ -1,9 +1,9 @@
 import Axios from "../Axios"
 import { resources } from "../resource"
 
-const SignupAPI = async (user) => {
+const SignupAPI = async (user, signal) => {
     let jsonData;
-    await Axios.post(`/users` , user)
+    await Axios.post(`/users`, { user, signal })
         .then((response) => {
             if (response.status === 201) {
                 jsonData = { isSuccess: true, message: resources.SIGNUP.SUCCESS_SIGNUP, type: "success" }
@@ -13,7 +13,7 @@ const SignupAPI = async (user) => {
             }
         })
         .catch((error) => {
-            console.log(error);
+            if (error.code === 'ERR_CANCELED') console.log(error);
             jsonData = { isSuccess: false, message: "error", type: "danger" }
         })
     return jsonData

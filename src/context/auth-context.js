@@ -12,8 +12,8 @@ const AuthContextProvider = (props) => {
 
     const [isAuthentication, setIsAuthentication] = useState((getCookie("uId") !== ''))
 
-    const onAuthentication = async (user) => {
-        var response = await SigninAPI(user);
+    const onAuthentication = async (user,signal) => {
+        var response = await SigninAPI(user,signal);
         return response;
     }
 

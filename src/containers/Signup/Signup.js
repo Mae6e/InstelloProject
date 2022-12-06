@@ -52,8 +52,9 @@ const Signup = (props) => {
             //submitIconRef.current.style.display ="var(--fa-display, inline-block)"
             //setDisableSignupButton(true)
             props.onShowLoading()
+            const controller = new AbortController();
 
-            SignupAPI({ id: CreateUUID(), ...values }).then((response) => {
+            SignupAPI({ id: CreateUUID(), ...values ,signal:controller.signal}).then((response) => {
 
                 NotificationProvider(response.message, response.type)
                 //submitIconRef.current.style.display ="none";
@@ -65,6 +66,8 @@ const Signup = (props) => {
                 else
                 return navigate("/")
             })
+
+            controller.abort()
         }
     })
 

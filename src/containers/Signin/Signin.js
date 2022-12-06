@@ -13,7 +13,7 @@ const Signin = (props) => {
 
     const authContext = useContext(AuthContext)
     const [isActiveVerificationStep, setActiveVerificationStep] = useState(false)
-    const [user, setUser]= useState()
+    const [user, setUser] = useState()
 
     const formik = useFormik({
         initialValues: {
@@ -31,8 +31,9 @@ const Signin = (props) => {
         }),
         onSubmit: (values) => {
             props.onShowLoading()
+            const controller = new AbortController();
 
-            authContext.onAuthentication({ email: values.email, password: values.password })
+            authContext.onAuthentication({ email: values.email, password: values.password , signal:controller.signal })
                 .then((response) => {
                     if (!response.isSuccess) {
                         NotificationProvider(response.message, response.type)
@@ -44,6 +45,8 @@ const Signin = (props) => {
                         props.onHideLoading()
                     }
                 })
+
+            controller.abort()
         }
     })
 

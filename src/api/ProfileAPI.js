@@ -2,17 +2,17 @@
 import axios from "../Axios"
 import getCookie from "../utilities/getCookie"
 
-export const GetUserInfo = async () => {
+export const GetUserInfo = async (signal) => {
     let jsonData;
-    await axios.get(`/users?id=${getCookie('uId')}`).then((response) => {
+    await axios.get(`/users?id=${getCookie('uId')}`, signal).then((response) => {
         if (response.status === 200 && response.data.length > 0) {
-            jsonData = { isSuccess: true,  type: "success" , entity:response.data[0] }
+            jsonData = { isSuccess: true, type: "success", entity: response.data[0] }
         }
         else {
             jsonData = { isSuccess: false, type: "danger" }
         }
     }).catch(error => {
-        console.log(error);
+        if (error.code === 'ERR_CANCELED') console.log(error);
         jsonData = { isSuccess: false, message: "error", type: "danger" }
     })
 

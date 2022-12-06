@@ -11,12 +11,19 @@ const MessageBox = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        GetMessages().then(response => {
-            if (response.isSuccess) {
+        const controller = new AbortController();
+        let mounted = true;
+
+        GetMessages({ signal: controller.signal }).then(response => {
+            if (response.isSuccess && mounted) {
                 setMessages(response.entity)
+                setIsLoading(false)
             }
-            setIsLoading(false)
         })
+        return () => {
+            controller.abort()
+            mounted = false
+        }
     }, [])
 
     const messageBoxContent = {
@@ -27,10 +34,10 @@ const MessageBox = () => {
                         messages.map((item) => {
                             return (<li key={item.id}>
                                 <a href="trending.html#">
-                                    <div className="drop_avatar"> <img src={item.image?? avator} alt="" />
+                                    <div className="drop_avatar"> <img src={item.image ?? avator} alt="" />
                                     </div>
                                     <div className="drop_content">
-                                        <span> {item.senderfullname??null} </span> <time> {item.date}</time>
+                                        <span> {item.senderfullname ?? null} </span> <time> {item.date}</time>
                                         <p> {item.description} </p>
                                     </div>
                                 </a>

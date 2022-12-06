@@ -101,5 +101,9 @@ export const resources = {
     DEVELOP: " طراحی و توسعه ",
     INSTELLLO: " اینستلو ",
     PRIVACY: " حریم خصوصی "
+  },
+  EXPLORE:{
+    TITLE: "بازدید",
+
   }
 }
