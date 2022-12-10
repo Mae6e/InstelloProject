@@ -21,8 +21,8 @@ const Header = (props) => {
                     <li><a href="form-login.html"> {resources.HEADER.LOGOUT}</a></li>
                 </ul>
             </div> : null,
-        showMessage: props.showHeaderItems.isShowMessage ? <MessageBox /> : null,
-        showNotification: props.showHeaderItems.isShowNotification ? <NotificationBox /> : null
+        showMessage: props.showHeaderItems.isShowMessage ? <MessageBox nightMode={props.nightMode} /> : null,
+        showNotification: props.showHeaderItems.isShowNotification ? <NotificationBox nightMode={props.nightMode} /> : null
     }
 
     return (<header>

@@ -1,15 +1,19 @@
-import React, { useState , useEffect } from "react"
+import React, { useState, useEffect, Suspense } from "react"
+import { Route , Routes ,Link } from "react-router-dom"
 import Sidebar from "../Sidebar/Sidebar"
 import useNightMode from "../../hooks/night-mode"
 import Header from "../Header/Header"
 import Loading from "../UI/Loading/Loading"
 import { GetUserInfo } from "../../api/ProfileAPI"
-import Explore from "../../containers/Explore/Explore"
+//import Explore from "../../containers/Explore/Explore"
+import Modal from "../UI/Modal/Modal"
 
 import './icons.css'
 import './uikit.css'
 import './style.css'
 import './tailwind.css'
+
+const Explore = React.lazy(() =>  import("../../containers/Explore/Explore"))
 
 const Layout = () => {
 
@@ -20,7 +24,7 @@ const Layout = () => {
     const [user, setUser] = useState({})
 
     useEffect(() => {
-        
+
         const controller = new AbortController();
         let mounted = true;
 
@@ -36,9 +40,10 @@ const Layout = () => {
         }
     }, [])
 
-    const hideLoadingHandler =()=>{
-        console.log(user)
+    const hideLoadingHandler = () => {
+      setTimeout(() => {
         setLoading(false)
+      }, 900);
     }
 
     const [showHeaderItems, setHeaderItems] = useState(
@@ -79,15 +84,21 @@ const Layout = () => {
 
     }
 
-    return (<div id="wrapper" className={`${isToggle ? 'sidebar-active' : ''}`} >
-        <Loading className='loading-main' style={isLoading?{display:"flex"}:{display:"none"}} />
-        <Sidebar toggleNightMode={toggleNightMode} currentUser={user} toggleClick={toggleHandler} sidebarClick={() => { headerHandler(null) }}  />
-        <div className="main_content">
-            <Header currentUser={user} toggleClick={toggleHandler} showHeaderItems={showHeaderItems} headerClick={(currentKey) => headerHandler(currentKey)} >
-            </Header>
-            <Explore nightMode={nightMode} contentClick={contentHandler} ></Explore>
+    return (<>
+        <div id="wrapper" className={`${isToggle ? 'sidebar-active' : ''}`} >
+            <Sidebar isLoading={isLoading} nightMode={nightMode} toggleNightMode={toggleNightMode} currentUser={user} toggleClick={toggleHandler} sidebarClick={() => { headerHandler(null) }} />
+            <div className="main_content">
+                <Header nightMode={nightMode} currentUser={user} toggleClick={toggleHandler} showHeaderItems={showHeaderItems} headerClick={(currentKey) => headerHandler(currentKey)} >
+                </Header>
+                <Suspense>
+                  <Routes>
+                    <Route path="" element={ <Explore nightMode={nightMode} contentClick={contentHandler} ></Explore>} />
+                  </Routes>
+                </Suspense>
+            </div>
         </div>
-    </div>
+        {/* <Modal></Modal> */}
+    </>
     )
 }
 

@@ -1,20 +1,21 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, Suspense } from "react"
 import { resources } from "../../resource"
-import { Route, Routes,Link } from "react-router-dom"
+import { Route, Routes, Link } from "react-router-dom"
 import useNightMode from "../../hooks/night-mode"
 import OffCanvas from "../UI/OffCanvas/OffCanvas"
-import Signup from "../../containers/Signup/Signup"
-import Signin from "../../containers/Signin/Signin"
-import SignupRole from "../UI/SignupRule/SignupRule"
 
 import { ReactNotifications } from 'react-notifications-component'
 import logo from "../../assets/images/logo.png"
 import lightLogo from "../../assets/images/logo-light.png"
 import Loading from "../UI/Loading/Loading"
 
+import './uikit.css'
 import './style.css'
 import './tailwind.css'
-import './icons.css'
+
+const Signup = React.lazy(() => import("../../containers/Signup/Signup"))
+const Signin = React.lazy(() => import("../../containers/Signin/Signin"))
+const SignupRole = React.lazy(() => import("../UI/SignupRule/SignupRule"))
 
 const InitLayout = (props) => {
 
@@ -31,11 +32,11 @@ const InitLayout = (props) => {
         // document.body.style.overflowY = "hidden"
     }
 
-    const showLoadingHandler =()=>{
+    const showLoadingHandler = () => {
         setLoading(true)
     }
 
-    const hideLoadingHandler =()=>{
+    const hideLoadingHandler = () => {
         setLoading(false)
     }
 
@@ -75,14 +76,16 @@ const InitLayout = (props) => {
                 </div>
             </div>
 
-            <div style={{position:"relative"}}>
+            <div style={{ position: "relative" }}>
                 <ReactNotifications />
-                <Loading style={isLoading?{display:"flex"}:{display:"none"}} />
+                <Loading style={isLoading ? { display: "flex" } : { display: "none" }} />
                 <div className="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-">
-                    <Routes>
-                        <Route path="/Signup" element={<Signup confirmRule={confirmRule} onConfirmRule={()=>setConfirmRule(!confirmRule)} onShowCanvasPage={onShowCanvasPageHandler} onShowLoading ={showLoadingHandler} onHideLoading={hideLoadingHandler} ></Signup>} />
-                        <Route path="/" element={<Signin onShowLoading ={showLoadingHandler} onHideLoading={hideLoadingHandler}></Signin>} />
-                    </Routes>
+                    <Suspense fallback={<Loading style={{ display: "flex" }} />}>
+                        <Routes>
+                            <Route path="/Signup" element={<Signup confirmRule={confirmRule} onConfirmRule={() => setConfirmRule(!confirmRule)} onShowCanvasPage={onShowCanvasPageHandler} onShowLoading={showLoadingHandler} onHideLoading={hideLoadingHandler} ></Signup>} />
+                            <Route path="/" element={<Signin onShowLoading={showLoadingHandler} onHideLoading={hideLoadingHandler}></Signin>} />
+                        </Routes>
+                    </Suspense>
                 </div>
             </div>
 
@@ -101,8 +104,6 @@ const InitLayout = (props) => {
                 </label>
             </div>
 
-    
-
             <div className="lg:mb-5 py-3 uk-link-reset">
                 <div className="flex flex-col items-center justify-between lg:flex-row max-w-6xl mx-auto lg:space-y-0 space-y-3">
                     <div className="flex space-x-2 text-gray-700 uppercase">
@@ -120,7 +121,9 @@ const InitLayout = (props) => {
         </div>
 
         <OffCanvas ref={offcanvasRef} title={resources.SIGNUP.TERMS_AND_CONDITIONS} isShow={showOffCanvas} onHide={onHideCanvasPageHandler} >
-            <SignupRole onConfirmRule={onConfirmRuleHandler} ></SignupRole>
+            <Suspense fallback={<Loading style={{ display: "flex" }} />}>
+                <SignupRole onConfirmRule={onConfirmRuleHandler} ></SignupRole>
+            </Suspense>
         </OffCanvas>
     </div>
     )

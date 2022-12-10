@@ -6,8 +6,6 @@ import GridContentLoader from "../../components/UI/GridContentLoader/GridContent
 import GridContentWithHeaderLoader from "../../components/UI/GridContentLoader/GridContentWithHeaderLoader"
 import InfiniteScroll from "react-infinite-scroll-component"
 
-import 'animate.css'
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons"
 const commentIcon = <FontAwesomeIcon style={{ fontSize: "12px" }} icon={faComment} />
@@ -40,7 +38,7 @@ const Explore = (props) => {
                 setPosts(response.entity)
                 setTimeout(() => {
                     setIsLoading(false)
-                }, 2000);
+                }, 500);
             }
         })
 
@@ -55,7 +53,7 @@ const Explore = (props) => {
     }, [])
 
     const fetchMorePosts = () => {
-
+        debugger;
         if (posts.length >= 60) {
             setHasMore(false)
             return
@@ -82,8 +80,8 @@ const Explore = (props) => {
     const contentExplore = {
         false: posts.map((item, index) => (
             item.type === "video" ?
-                <div key={index} className="lg:col-span-2 lg:row-span-2 animate__animated animate__pulse">
-                    <div className="bg-pink-400 h-full max-w-full overflow-hidden relative rounded-md uk-transition-toggle shadow-sm">
+                <div key={index} className="lg:col-span-2 lg:row-span-2 ">
+                    <div className="simple-animate bg-pink-400 h-full max-w-full overflow-hidden relative rounded-md uk-transition-toggle shadow-sm">
                         <a href="explore.html#story-modal" uk-toggle="">
                             <img src={item.file} alt={item.title} className="w-full h-full absolute object-cover inset-0 transform scale-125" />
                         </a>
@@ -112,7 +110,7 @@ const Explore = (props) => {
                     </div>
                 </div> :
                 <div key={index} >
-                    <div className="animate__animated animate__pulse bg-purple-400 max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden shadow-sm">
+                    <div className="simple-animate bg-purple-400 max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden shadow-sm">
                         <a href="explore.html#story-modal" uk-toggle="">
                             <img src={item.file} alt={item.title} className="w-full h-full absolute object-cover inset-0" />
                         </a>

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { resources } from "../../resource";
 import CustomSrollbar from "../UI/CustomScrollbar/CustomScrollbar";
 import { GetMessages } from "../../api/MessageAPI"
-import SpinnerLoader from "../UI/SpinnerLoader/SpinnerLoader";
 import avator from "../../assets/images/avatars/blank-profile.webp"
+import BoxContentLoader from "../UI/BoxContentLoader/BoxContentLoader"
 
-const MessageBox = () => {
+
+const MessageBox = (props) => {
 
     const [messages, setMessages] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -46,7 +47,7 @@ const MessageBox = () => {
                     }
                 </ul>
             </CustomSrollbar>,
-        true: <SpinnerLoader />
+        true: <BoxContentLoader nightMode={props.nightMode} />
     }
 
     return (<div uk-drop="mode: click;offset: 4" className="header_dropdown uk-drop uk-open" style={{ left: "4%", top: "1.5%" }}>

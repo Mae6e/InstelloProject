@@ -599,8 +599,8 @@ video {
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
-  margin-right: calc(1rem * var(--tw-space-x-reverse));
-  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+  margin-left: calc(1rem * var(--tw-space-x-reverse));
+  margin-right: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-5 > :not([hidden]) ~ :not([hidden]){
@@ -1418,6 +1418,9 @@ video {
 .-ml-2{
   margin-left: -0.5rem;
 }
+.-mr-2{
+  margin-right: -0.5rem;
+}
 
 .-mr-3{
   margin-right: -0.75rem;
@@ -1704,6 +1707,10 @@ video {
   right: 0px;
 }
 
+.left-0{
+  left: 0px;
+}
+
 .bottom-0{
   bottom: 0px;
 }
@@ -1722,6 +1729,10 @@ video {
 
 .right-3{
   right: 0.75rem;
+}
+
+.left-3{
+  left: 0.75rem;
 }
 
 .bottom-3{

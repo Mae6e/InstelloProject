@@ -1,8 +1,9 @@
-import { useContext } from "react";
-import Layout from "./components/Layout/Layout";
-import InitLayout from "./components/Layout/InitLayout"
+import React, { Suspense, useContext } from "react"
 import { AuthContext } from "./context/auth-context";
-import {BrowserRouter as Router} from "react-router-dom"
+import { BrowserRouter as Router } from "react-router-dom"
+
+const InitLayout = React.lazy(() => import("./components/Layout/InitLayout"))
+const Layout = React.lazy(() => import('./components/Layout/Layout'))
 
 function App() {
   const authContext = useContext(AuthContext)
@@ -10,7 +11,12 @@ function App() {
     true: <Layout />,
     false: <InitLayout />
   };
-  return (<Router>{content[authContext.isAuthentication]}</Router>)
+  return (
+    <Router>
+      <Suspense>
+        {content[authContext.isAuthentication]}
+      </Suspense>
+    </Router>)
 }
 
 export default App;
