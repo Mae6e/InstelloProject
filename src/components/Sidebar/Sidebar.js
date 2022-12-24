@@ -13,7 +13,7 @@ const Sidebar = (props) => {
         true: <ProfileContentLoader  nightMode={props.nightMode} />,
         false: <div className="flex flex-col items-center my-6 uk-visible@s">
             <div className="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transition m-0.5 ml-2  w-24 h-24">
-                <img src={props.currentUser.image ?? avator} className="bg-gray-200 border-4 border-white rounded-full w-full h-full" alt=""></img>
+                <img src={props.currentUser.image ?? avator} loading="lazy" className="bg-gray-200 border-4 border-white rounded-full w-full h-full" alt=""></img>
             </div>
             <a href="profile.html" className="text-xl font-medium capitalize mt-4 uk-link-reset">{props.currentUser.firstname ?? null} {props.currentUser.lastname ?? null}
             </a>
@@ -43,8 +43,8 @@ const Sidebar = (props) => {
     return <div className="sidebar" onClick={props.sidebarClick}>
         <div className="sidebar_header border-b border-gray-200 from-gray-100 to-gray-50 bg-gradient-to-t  uk-visible@s">
             <a href="profile.html#">
-                <img src={logo} alt="" />
-                <img src={lightLogo} className="logo_inverse" alt="" />
+                <img src={logo} loading="lazy" alt="" />
+                <img src={lightLogo} loading="lazy" className="logo_inverse" alt="" />
             </a>
             <span onClick={props.toggleNightMode} id="night-mode" className="btn-night-mode" data-tippy-placement="left" title={resources.HEADER.SWITCHTONIGHTMOODE} ></span>
         </div>

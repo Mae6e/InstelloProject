@@ -30,8 +30,8 @@ const Header = (props) => {
             <div className="right-side">
                 <div id="logo" className=" uk-hidden@s">
                     <a href="http://demo.foxthemes.net/instellohtml/home.html">
-                        <img src={logo} alt="" />
-                        <img src={lightLogo} className="logo_inverse" />
+                        <img src={logo} loading="lazy" alt="" />
+                        <img src={lightLogo} loading="lazy" className="logo_inverse" />
                     </a>
                 </div>
 
@@ -127,7 +127,7 @@ const Header = (props) => {
                 {content["showMessage"]}
 
                 <button onClick={() => profileHandler('isShowProfile')}>
-                    <img src={props.currentUser.image?? avator} className="header-avatar" alt="" />
+                    <img src={props.currentUser.image?? avator} loading="lazy" className="header-avatar" alt="" />
                 </button>
                 {content["showProfile"]}
 

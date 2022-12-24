@@ -83,19 +83,19 @@ const Explore = (props) => {
                 <div key={index} className="lg:col-span-2 lg:row-span-2 ">
                     <div className="simple-animate bg-pink-400 h-full max-w-full overflow-hidden relative rounded-md uk-transition-toggle shadow-sm">
                         <a href="explore.html#story-modal" uk-toggle="">
-                            <img src={item.file} alt={item.title} className="w-full h-full absolute object-cover inset-0 transform scale-125" />
+                            <img src={item.file} alt={item.title} loading="lazy" className="w-full h-full absolute object-cover inset-0 transform scale-125" />
                         </a>
                         <div className="absolut absolute bottom-0 p-6 space-y-2 text-white w-full custom-overly1 uk-light lg:block hidden">
                             <div className="flex flex-1 items-center space-x-2">
                                 <a href="explore.html#" className="flex items-center">
                                     <div className="bg-gradient-to-tr from-yellow-600 to-pink-600 p-1 rounded-full transform -rotate-2 hover:rotate-3 transition hover:scale-105 m-0.5 ml-2">
-                                        <img src={item.userimage} alt={item.title} className="bg-gray-200 border border-white rounded-full w-8" />
+                                        <img src={item.userimage} alt={item.title} loading="lazy" className="bg-gray-200 border border-white rounded-full w-8" />
                                     </div>
                                     {item.fullname}
                                 </a>
                                 <div className="flex space-x-3">
                                     <a href="explore.html#" className="flex items-center">
-                                        <i name="heart" role="img" className="ml-1 md hydrated" aria-label="heart">{heartIcon}</i> {item.numberoflike}
+                                        <i name="heart" role="img" loading="lazy" className="ml-1 md hydrated" aria-label="heart">{heartIcon}</i> {item.numberoflike}
                                     </a>
                                     <a href="explore.html#" className="flex items-center">
                                         <i name="chatbubble-ellipses" className="ml-1 md hydrated" role="img" aria-label="chatbubble ellipses">
@@ -112,7 +112,7 @@ const Explore = (props) => {
                 <div key={index} >
                     <div className="simple-animate bg-purple-400 max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden shadow-sm">
                         <a href="explore.html#story-modal" uk-toggle="">
-                            <img src={item.file} alt={item.title} className="w-full h-full absolute object-cover inset-0" />
+                            <img src={item.file} alt={item.title} loading="lazy" className="w-full h-full absolute object-cover inset-0" />
                         </a>
                         <div className="absolut absolute bottom-0 flex items-center justify-between px-4 py-3 space-x-2 text-white w-full custom-overly1">
                             <a href="explore.html#" className="flex items-center">

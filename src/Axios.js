@@ -1,10 +1,7 @@
-import axios from "axios";
-
-export const CancelToken = axios.CancelToken;
+import axios from "axios"
 
 const Axios = axios.create({
-    baseURL:"https://my-json-server.typicode.com/maede71/InstelloDb",
-   // CancelToken,
+    baseURL:"https://my-json-server.typicode.com/maede71/"
 })
 
 export default Axios

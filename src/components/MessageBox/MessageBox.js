@@ -35,7 +35,7 @@ const MessageBox = (props) => {
                         messages.map((item) => {
                             return (<li key={item.id}>
                                 <a href="trending.html#">
-                                    <div className="drop_avatar"> <img src={item.image ?? avator} alt="" />
+                                    <div className="drop_avatar"> <img src={item.image ?? avator} loading="lazy" alt="" />
                                     </div>
                                     <div className="drop_content">
                                         <span> {item.senderfullname ?? null} </span> <time> {item.date}</time>

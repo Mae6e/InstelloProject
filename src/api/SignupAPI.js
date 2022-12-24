@@ -3,7 +3,7 @@ import { resources } from "../resource"
 
 const SignupAPI = async (user, signal) => {
     let jsonData;
-    await Axios.post(`/users`, { user, signal })
+    await Axios.post(`InstelloDb-01/users`, { user, signal })
         .then((response) => {
             if (response.status === 201) {
                 jsonData = { isSuccess: true, message: resources.SIGNUP.SUCCESS_SIGNUP, type: "success" }

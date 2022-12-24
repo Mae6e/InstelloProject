@@ -2,7 +2,7 @@ import axios from "../Axios";
 
 export const ExplorerPosts = async (signal) => {
     let jsonData;
-    await axios.get("/explorerposts",signal).then((response) => {
+    await axios.get("InstelloDb-01/explorerposts",signal).then((response) => {
         if (response.status === 200 && response.data.length > 0) {
             jsonData = { isSuccess: true, type: "success", entity: response.data }
         }
@@ -21,7 +21,7 @@ export const ExplorerPosts = async (signal) => {
 export const FavoriteTopic = async(signal)=>{
 
     let jsonData
-    await axios.get('/favoritetopic',signal)
+    await axios.get('InstelloDb-01/favoritetopic',signal)
     .then(response=>{
         if (response.status === 200 && response.data.length > 0) {
             jsonData = { isSuccess: true, type: "success", entity: response.data }

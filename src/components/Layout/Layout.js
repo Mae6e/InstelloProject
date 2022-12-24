@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Suspense } from "react"
-import { Route , Routes ,Link } from "react-router-dom"
+import { Route, Routes, Link } from "react-router-dom"
 import Sidebar from "../Sidebar/Sidebar"
 import useNightMode from "../../hooks/night-mode"
 import Header from "../Header/Header"
 import Loading from "../UI/Loading/Loading"
 import { GetUserInfo } from "../../api/ProfileAPI"
-//import Explore from "../../containers/Explore/Explore"
+
 import Modal from "../UI/Modal/Modal"
 
 import './icons.css'
@@ -13,7 +13,7 @@ import './uikit.css'
 import './style.css'
 import './tailwind.css'
 
-const Explore = React.lazy(() =>  import("../../containers/Explore/Explore"))
+const Explore = React.lazy(() => import("../../containers/Explore/Explore"))
 
 const Layout = () => {
 
@@ -22,6 +22,7 @@ const Layout = () => {
     const [isToggle, setToggle] = useState(false)
     const [isLoading, setLoading] = useState(true)
     const [user, setUser] = useState({})
+    const [isShownModal, setIsShownModal] = useState(true)
 
     useEffect(() => {
 
@@ -31,8 +32,8 @@ const Layout = () => {
         GetUserInfo({ signal: controller.signal }).then(response => {
             if (response.isSuccess && mounted) {
                 setUser(response.entity)
+                hideLoadingHandler()
             }
-            hideLoadingHandler()
         })
         return () => {
             controller.abort()
@@ -41,9 +42,9 @@ const Layout = () => {
     }, [])
 
     const hideLoadingHandler = () => {
-      setTimeout(() => {
-        setLoading(false)
-      }, 900);
+        setTimeout(() => {
+            setLoading(false)
+        }, 900);
     }
 
     const [showHeaderItems, setHeaderItems] = useState(
@@ -91,13 +92,13 @@ const Layout = () => {
                 <Header nightMode={nightMode} currentUser={user} toggleClick={toggleHandler} showHeaderItems={showHeaderItems} headerClick={(currentKey) => headerHandler(currentKey)} >
                 </Header>
                 <Suspense>
-                  <Routes>
-                    <Route path="" element={ <Explore nightMode={nightMode} contentClick={contentHandler} ></Explore>} />
-                  </Routes>
+                    <Routes>
+                        <Route path="" element={<Explore nightMode={nightMode} contentClick={contentHandler} ></Explore>} />
+                    </Routes>
                 </Suspense>
             </div>
         </div>
-        {/* <Modal></Modal> */}
+        {/* <Modal isShown={isShownModal}></Modal> */}
     </>
     )
 }

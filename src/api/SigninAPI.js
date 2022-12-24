@@ -3,7 +3,7 @@ import { resources } from "../resource"
 
 const SigninAPI = async (user,signal) => {
     let jsonData;
-    await Axios.get(`/users?email=${user.email}&&password=${user.password}`,signal)
+    await Axios.get(`InstelloDb-01/users?email=${user.email}&&password=${user.password}`,signal)
         .then((response) => {
             if (response.status === 200 && response.data.length > 0) {
                 jsonData = { isSuccess: true, message: resources.SIGNIN.SUCCESS_SIGNIN, type: "success" , entity:response.data[0] }

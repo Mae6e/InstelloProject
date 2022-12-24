@@ -63,8 +63,8 @@ const InitLayout = (props) => {
                     <div className="flex items-center lg:justify-between justify-around">
 
                         <Link to="/">
-                            <img src={logo} className="w-32 logo_dark" alt="" />
-                            <img src={lightLogo} className="w-32 logo_light" alt="" />
+                            <img src={logo} loading="lazy" className="w-32 logo_dark" alt="" />
+                            <img src={lightLogo} loading="lazy" className="w-32 logo_light" alt="" />
                         </Link>
 
                         <div className="capitalize flex font-semibold hidden lg:block my-2 space-x-3 text-center text-sm">

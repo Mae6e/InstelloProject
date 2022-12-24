@@ -4,7 +4,7 @@ import getCookie from "../utilities/getCookie"
 
 export const GetUserInfo = async (signal) => {
     let jsonData;
-    await axios.get(`/users?id=${getCookie('uId')}`, signal).then((response) => {
+    await axios.get(`InstelloDb-01/users?id=${getCookie('uId')}`, signal).then((response) => {
         if (response.status === 200 && response.data.length > 0) {
             jsonData = { isSuccess: true, type: "success", entity: response.data[0] }
         }
