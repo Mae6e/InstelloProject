@@ -6,6 +6,9 @@ import GridContentLoader from "../../components/UI/GridContentLoader/GridContent
 import GridContentWithHeaderLoader from "../../components/UI/GridContentLoader/GridContentWithHeaderLoader"
 import InfiniteScroll from "react-infinite-scroll-component"
 
+import ExplorerModalContent from "../../containers/Explore/ExploreModalContent"
+import Modal from "../../components/UI/Modal/Modal"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons"
 const commentIcon = <FontAwesomeIcon style={{ fontSize: "12px" }} icon={faComment} />
@@ -18,6 +21,8 @@ const Explore = (props) => {
     const [favoriteTopics, setfavoriteTopic] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [hasMore, setHasMore] = useState(true)
+    const [isShownModal, setIsShownModal] = useState(false)
+    const [selectedPostId, setSelectedPostId] = useState(null)
 
     useEffect(() => {
 
@@ -25,7 +30,7 @@ const Explore = (props) => {
         const exploreController = new AbortController()
 
         let mounted = true;
-        let explpreMounted = true;
+        let exploreMounted = true;
 
         FavoriteTopic({ signal: controller.signal }).then(response => {
             if (response.isSuccess && mounted) {
@@ -34,7 +39,7 @@ const Explore = (props) => {
         })
 
         ExplorerPosts({ signal: exploreController.signal }).then(response => {
-            if (response.isSuccess && explpreMounted) {
+            if (response.isSuccess && exploreMounted) {
                 setPosts(response.entity)
                 setTimeout(() => {
                     setIsLoading(false)
@@ -46,14 +51,14 @@ const Explore = (props) => {
             controller.abort()
             exploreController.abort()
 
-            explpreMounted = false
+            exploreMounted = false
             mounted = false
         }
 
     }, [])
 
     const fetchMorePosts = () => {
-        debugger;
+
         if (posts.length >= 60) {
             setHasMore(false)
             return
@@ -66,25 +71,31 @@ const Explore = (props) => {
                 const exploreController = new AbortController()
                 ExplorerPosts({ signal: exploreController.signal }).then(response => {
                     if (response.isSuccess) {
-
                         setPosts([...posts].concat(response.entity))
                         exploreController.abort()
                         isLoadPost = false
                     }
                 })
-            }, 2000)
+            }, 200)
         }
     }
 
+    const showModalHandler = (event, id) => {
+        event.preventDefault()
+        if (!isShownModal) {
+            setSelectedPostId(id)
+            setIsShownModal(true)
+        }
+    }
 
     const contentExplore = {
         false: posts.map((item, index) => (
             item.type === "video" ?
-                <div key={index} className="lg:col-span-2 lg:row-span-2 ">
+                <div key={index} onClick={(event) => showModalHandler(event, item.id)} className="lg:col-span-2 lg:row-span-2 ">
                     <div className="simple-animate bg-pink-400 h-full max-w-full overflow-hidden relative rounded-md uk-transition-toggle shadow-sm">
-                        <a href="explore.html#story-modal" uk-toggle="">
+                        <span>
                             <img src={item.file} alt={item.title} loading="lazy" className="w-full h-full absolute object-cover inset-0 transform scale-125" />
-                        </a>
+                        </span>
                         <div className="absolut absolute bottom-0 p-6 space-y-2 text-white w-full custom-overly1 uk-light lg:block hidden">
                             <div className="flex flex-1 items-center space-x-2">
                                 <a href="explore.html#" className="flex items-center">
@@ -109,11 +120,11 @@ const Explore = (props) => {
                         </div>
                     </div>
                 </div> :
-                <div key={index} >
+                <div key={index} onClick={(event) => showModalHandler(event, item.id)}  >
                     <div className="simple-animate bg-purple-400 max-w-full lg:h-64 h-40 rounded-md relative overflow-hidden shadow-sm">
-                        <a href="explore.html#story-modal" uk-toggle="">
+                        <span>
                             <img src={item.file} alt={item.title} loading="lazy" className="w-full h-full absolute object-cover inset-0" />
-                        </a>
+                        </span>
                         <div className="absolut absolute bottom-0 flex items-center justify-between px-4 py-3 space-x-2 text-white w-full custom-overly1">
                             <a href="explore.html#" className="flex items-center">
                                 {item.fullname}
@@ -133,7 +144,8 @@ const Explore = (props) => {
 
     return (
         <>
-            <div className="container m-auto" onClick={props.contentClick}>
+            {/* onClick={props.contentClick} */}
+            <div className="container m-auto" >
                 <h1 className="lg:lg:text-2xl text-lg text-lg font-extrabold leading-none text-gray-900 tracking-tight mt-3"> {resources.EXPLORE.TITLE} </h1>
 
                 <div className="lg:m-0 flex justify-between items-center py-2 relative space-x-3 dark-tabs uk-sticky" uk-sticky="cls-active: bg-gray-100 bg-opacity-95; media : @m ; media @m">
@@ -156,6 +168,10 @@ const Explore = (props) => {
                     scrollableTarget="scrollableDiv" >
                 </InfiniteScroll>
             </div>
+
+            <Modal isShown={isShownModal} className='w-full' onClose={() => setIsShownModal(false)}>
+                <ExplorerModalContent nightMode={props.nightMode}  onPostId={selectedPostId} />
+            </Modal>
         </>
     )
 }

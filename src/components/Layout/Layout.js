@@ -3,10 +3,7 @@ import { Route, Routes, Link } from "react-router-dom"
 import Sidebar from "../Sidebar/Sidebar"
 import useNightMode from "../../hooks/night-mode"
 import Header from "../Header/Header"
-import Loading from "../UI/Loading/Loading"
 import { GetUserInfo } from "../../api/ProfileAPI"
-
-import Modal from "../UI/Modal/Modal"
 
 import './icons.css'
 import './uikit.css'
@@ -22,7 +19,6 @@ const Layout = () => {
     const [isToggle, setToggle] = useState(false)
     const [isLoading, setLoading] = useState(true)
     const [user, setUser] = useState({})
-    const [isShownModal, setIsShownModal] = useState(true)
 
     useEffect(() => {
 
@@ -93,12 +89,12 @@ const Layout = () => {
                 </Header>
                 <Suspense>
                     <Routes>
-                        <Route path="" element={<Explore nightMode={nightMode} contentClick={contentHandler} ></Explore>} />
+                        <Route path="" element={<Explore nightMode={nightMode}></Explore>} />
+                        {/* contentClick={contentHandler}  */}
                     </Routes>
                 </Suspense>
             </div>
         </div>
-        {/* <Modal isShown={isShownModal}></Modal> */}
     </>
     )
 }

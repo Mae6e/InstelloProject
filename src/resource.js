@@ -106,7 +106,9 @@ export const resources = {
     TITLE: 'بازدید',
     LIKE: 'لایک',
     COMMENT: 'نظرها',
-    SHARE:'اشتراک'
-
+    SHARE:'اشتراک' ,
+    OTHER:'دیگر',
+    PEOPLE :'نفر',
+    ADDEDCOMMENT : 'نظر خود را وارد کنید ...'
   },
 }
