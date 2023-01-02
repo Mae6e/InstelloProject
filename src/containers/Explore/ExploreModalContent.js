@@ -19,6 +19,7 @@ const ExplorerModalContent = (props) => {
     useEffect(() => {
 
         if (props.onPostId) {
+            setShareBoxActive(false)
             setIsLoading(true)
 
             const controller = new AbortController()
@@ -98,7 +99,6 @@ const ExplorerModalContent = (props) => {
                                                 <FiHeart onClick={addHeartHandler} className="heart" />
                                                 <span>&nbsp;</span>{resources.EXPLORE.LIKE}</div>
                                         </button>
-
 
 
                                         <button onClick={toShareHandler} className="flex items-center space-x-3">

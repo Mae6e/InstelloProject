@@ -743,7 +743,7 @@ input[type="tel"] {
   background: #111827 !important;
 }
 
-.dark .story-modal input[type="text"] {
+.dark .story-modal textarea[type="text"] {
   background: #111827 !important;
   border-radius: inherit;
 }
