@@ -1,0 +1,78 @@
+.c-share {
+    width: 8rem;
+    position: absolute;
+    background: #fbfbfb;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    text-align: right;
+    padding: 0.5rem 1rem;
+    left: 2rem;
+    top:4rem;
+    display: none;
+}
+.c-share-active{
+    display: block;
+    animation: sharebox 2s;
+}
+
+.c-share__toggler {
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-share_options li {
+    font-size: 1.6rem;
+    padding: 1px;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-share_options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes sharebox-socialitem {
+    0% {
+        transform: scale(0.8);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(0.8);
+    }
+}
+
+@keyframes sharebox {
+    0% { opacity: 0;
+     }
+    100% { opacity: 1;
+     }
+}
+
+.c-share_options svg:hover {
+    animation: sharebox-socialitem 1s infinite;
+}
+
+.facebook {
+    fill: rgb(59, 89, 152);
+}
+
+.youtube {
+    fill: rgb(205, 32, 31);
+}
+
+.twitter {
+    fill: rgb(0, 172, 237);
+}
+
+.telegram {
+    fill: rgb(55, 174, 226);
+}

@@ -6,12 +6,15 @@ import ExploreModalContentLoader from '../../components/UI/ExploreModalContentLo
 import AliceCarousel from "react-alice-carousel"
 import "react-alice-carousel/lib/alice-carousel.css";
 
+import ShareInput from "../../components/UI/ShareInput/ShareInput"
+
 import { FiHeart, FiShare2 } from 'react-icons/fi';
 
 const ExplorerModalContent = (props) => {
 
     const [post, setPost] = useState(null)
     const [isLoding, setIsLoading] = useState(true)
+    const [isShareBoxActive , setShareBoxActive] = useState(false)
 
     useEffect(() => {
 
@@ -37,6 +40,18 @@ const ExplorerModalContent = (props) => {
             }
         }
     }, [props.onPostId])
+
+
+    const addHeartHandler = (event) => {
+        if (!event.target.classList.toString().indexOf('heart-active'))
+            event.target.classList.remove('heart-active')
+        else
+            event.target.classList.add('heart-active')
+    }
+
+    const toShareHandler =()=>{
+        setShareBoxActive(!isShareBoxActive)
+    }
 
     const responsive = {
         0: { items: 1 }
@@ -78,16 +93,20 @@ const ExplorerModalContent = (props) => {
                                 <div className="py-4 ">
                                     <div className="flex justify-around">
 
-                                        <a href="#" className="flex items-center space-x-3">
+                                        <button className="flex items-center space-x-3">
                                             <div className="flex font-bold items-baseline">
-                                                <FiHeart className="heart" />
+                                                <FiHeart onClick={addHeartHandler} className="heart" />
                                                 <span>&nbsp;</span>{resources.EXPLORE.LIKE}</div>
-                                        </a>
-                                        <a href="#" className="flex items-center space-x-3">
+                                        </button>
+
+
+
+                                        <button onClick={toShareHandler} className="flex items-center space-x-3">
                                             <div className="flex font-bold items-baseline">
                                                 <FiShare2 className="share" />
                                                 <span>&nbsp;</span>{resources.EXPLORE.SHARE}</div>
-                                        </a>
+                                            <ShareInput onActive={isShareBoxActive} />
+                                        </button>
                                     </div>
                                     <hr className="-mx-4 my-3" />
                                     <div className="flex items-center space-x-3">
