@@ -9,11 +9,7 @@ import InfiniteScroll from "react-infinite-scroll-component"
 import ExplorerModalContent from "../../containers/Explore/ExploreModalContent"
 import Modal from "../../components/UI/Modal/Modal"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons"
-const commentIcon = <FontAwesomeIcon style={{ fontSize: "12px" }} icon={faComment} />
-const heartIcon = <FontAwesomeIcon style={{ fontSize: "12px" }} icon={faHeart} />
-
+import { FaComment, FaHeart } from 'react-icons/fa';
 
 const Explore = (props) => {
 
@@ -106,12 +102,10 @@ const Explore = (props) => {
                                 </a>
                                 <div className="flex space-x-3">
                                     <a href="explore.html#" className="flex items-center">
-                                        <i name="heart" role="img" loading="lazy" className="ml-1 md hydrated" aria-label="heart">{heartIcon}</i> {item.numberoflike}
+                                        <FaHeart />&nbsp;{item.numberoflike}
                                     </a>
                                     <a href="explore.html#" className="flex items-center">
-                                        <i name="chatbubble-ellipses" className="ml-1 md hydrated" role="img" aria-label="chatbubble ellipses">
-                                            {commentIcon}
-                                        </i> {item.numberofcomment}
+                                        <FaComment />&nbsp;{item.numberofcomment}
                                     </a>
                                 </div>
                             </div>
@@ -130,10 +124,10 @@ const Explore = (props) => {
                                 {item.fullname}
                             </a>
                             <div className="flex space-x-3">
-                                <a href="explore.html#" className="flex items-center"> <i name="heart" className="ml-1 md hydrated" role="img" aria-label="heart"> {heartIcon} </i>
-                                    {item.numberoflike} </a>
-                                <a href="explore.html#" className="flex items-center"> <i name="chatbubble-ellipses" className="ml-1 md hydrated" role="img" aria-label="chatbubble ellipses"> {commentIcon} </i>
-                                    {item.numberofcomment} </a>
+                                <a href="explore.html#" className="flex items-center">
+                                    <FaHeart />&nbsp;{item.numberoflike} </a>
+                                <a href="explore.html#" className="flex items-center">
+                                    <FaComment />&nbsp;{item.numberofcomment} </a>
                             </div>
                         </div>
                     </div>
@@ -170,7 +164,7 @@ const Explore = (props) => {
             </div>
 
             <Modal isShown={isShownModal} className='w-full' onClose={() => setIsShownModal(false)}>
-                <ExplorerModalContent nightMode={props.nightMode}  onPostId={selectedPostId} />
+                <ExplorerModalContent nightMode={props.nightMode} onPostId={selectedPostId} />
             </Modal>
         </>
     )

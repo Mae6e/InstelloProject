@@ -5,7 +5,7 @@ const ExploreModalContentLoader = props => {
 
     return (
         window.innerWidth > 1024 ? (
-            <ContentLoader width={"100%"} title="" rtl backgroundColor={props.nightMode ? "#1f2937" : "#f0f2f5"}
+            <ContentLoader width={"100%"} height={"87vh"} title="" rtl backgroundColor={props.nightMode ? "#1f2937" : "#f0f2f5"}
                 foregroundColor={props.nightMode ? "#2a3748" : "#f0f2f5"}>
 
                 <rect x="620" y="90" rx="5" ry="5" width="350" height="10" />

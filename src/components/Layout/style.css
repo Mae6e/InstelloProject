@@ -3028,18 +3028,18 @@ header .uk-dropdown {
 
 .story-modal {
   max-width: 990px !important;
-  min-height: 87vh;
+  min-height: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
 .story-modal .story-modal-media {
-  max-width: 660px;
+  max-width: 600px;
 }
 
 .story-modal .story-content {
-  height: 70vh;
+  height: 60vh;
 }
 
 @media (max-width: 1024px) {
@@ -3059,13 +3059,15 @@ header .uk-dropdown {
   }
 
   .story-modal .story-modal-media img {
-    position: absolute;
     width: 100%;
-    height:100%;
   }
 
   .uk-modal.uk-open{
     overflow:auto;
+  }
+
+  .alice-carousel__dots {
+    bottom: auto;
   }
 }
 
@@ -3326,7 +3328,7 @@ a.bg-white.py-2.px-4.rounded.inline-block.font-bold.shadow {
   width: 37.5rem;
 }
 .h-35{
-  height: 35rem;
+  height: 34.8rem;
 }
 
 .rounded-full .uil-message{
@@ -3336,4 +3338,42 @@ a.bg-white.py-2.px-4.rounded.inline-block.font-bold.shadow {
 
 .dark .story-modal span {
   color:#d9cfcf
+}
+
+.alice-carousel__dots{
+  bottom:3rem;
+  position: relative;
+  margin: 0 !important;
+}
+
+.alice-carousel__stage-item{
+  width: 100% !important;
+}
+
+.alice-carousel{
+  height: 34.8rem;
+}
+
+.input-comment{
+  padding: 10px 20px 0 30px !important;
+  min-height: 45px;
+  resize: none;
+}
+
+@keyframes heartkey{
+  0%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.25);
+  }
+  100%{
+    transform:scale(1);
+  }
+}
+
+.heart:hover{
+  animation: heartkey 1s infinite;
+  fill:#d9012a;
+  color: #d9012a;
 }

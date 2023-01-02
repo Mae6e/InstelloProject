@@ -7,13 +7,9 @@ import SignupAPI from "../../api/SignupAPI"
 import NotificationProvider from "../../components/UI/Notification/Notification";
 import TextInput from "../../components/UI/TextInput/TextInput ";
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-
 const Signup = (props) => {
 
     const checkboxRef = useRef()
-    //const submitIconRef = useRef()
     const navigate = useNavigate()
 
     const [disableSignupButton, setDisableSignupButton] = useState(true);
@@ -48,17 +44,12 @@ const Signup = (props) => {
             lastname: Yup.string().required(resources.SIGNUP.INPUT_REQUIRED).min(3, resources.SIGNUP.INPUT_MIN_LASTNAME).max(100, resources.SIGNUP.INPUT_MAX_LASTNAME),
         }),
         onSubmit: (values ,{resetForm}) => {
-
-            //submitIconRef.current.style.display ="var(--fa-display, inline-block)"
-            //setDisableSignupButton(true)
             props.onShowLoading()
             const controller = new AbortController();
 
             SignupAPI({ id: CreateUUID(), ...values ,signal:controller.signal}).then((response) => {
 
                 NotificationProvider(response.message, response.type)
-                //submitIconRef.current.style.display ="none";
-                //setDisableSignupButton(false)
                 props.onHideLoading()
 
                 if(!response.isSuccess)
@@ -110,7 +101,6 @@ const Signup = (props) => {
                 <span onClick={props.onShowCanvasPage} className="rule-tag"> <span>{resources.SIGNUP.TERMS_AND_CONDITIONS}</span></span>
             </div>
             <button type="submit" disabled={disableSignupButton} className={`bg-gradient-to-br ${disableSignupButton ? "disabled-button" : "from-pink-500"} py-3 rounded-md text-white text-xl to-red-400 w-full`} >
-                {/* <FontAwesomeIcon ref={submitIconRef} style={{display:"none"}} className="spinner" icon={faSpinner} />  */}
                 {resources.SIGNUP.BUTTON_TEXT}</button>
             <div className="text-center mt-5 space-x-2">
                 <p className="text-base"> {resources.SIGNUP.HAS_ACCOUNT} <Link to="/" > {resources.SIGNUP.SIGNIN_ACCOUNT} </Link></p>

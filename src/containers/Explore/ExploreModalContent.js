@@ -3,6 +3,10 @@ import { resources } from "../../resource"
 import { GetPostDetails } from "../../api/PostAPI"
 import avator from "../../assets/images/avatars/blank-profile.webp"
 import ExploreModalContentLoader from '../../components/UI/ExploreModalContentLoader/ExploreModalContentLoader'
+import AliceCarousel from "react-alice-carousel"
+import "react-alice-carousel/lib/alice-carousel.css";
+
+import { FiHeart, FiShare2 } from 'react-icons/fi';
 
 const ExplorerModalContent = (props) => {
 
@@ -22,7 +26,7 @@ const ExplorerModalContent = (props) => {
                     if (response.isSuccess && mounted) {
                         setPost(response.entity)
                         setTimeout(() => {
-                           setIsLoading(false)
+                            setIsLoading(false)
                         }, 500);
                     }
                 })
@@ -34,11 +38,24 @@ const ExplorerModalContent = (props) => {
         }
     }, [props.onPostId])
 
+    const responsive = {
+        0: { items: 1 }
+    };
+
     const modalContent = {
         false:
             <>
                 <div className="story-modal-media">
-                    <img src={post?.images[0]} loading="lazy" alt="" className="inset-0 w-30 h-35 object-cover" />
+
+                    {(post?.images) ? (<AliceCarousel rtl={true}
+                        disableButtonsControls
+                        autoWidth={false}
+                        autoPlay={false}
+                        responsive={responsive}>
+                        {post?.images.map((item, index) => {
+                            return <img key={index} src={item} alt="" className="inset-0 h-35  object-cover w-full" />
+                        })}
+                    </AliceCarousel>) : null}
                 </div>
                 <div className="flex-1 bg-white dark:bg-gray-900 dark:text-gray-100">
                     <div className="border-b flex items-center justify-between px-5 py-3 dark:border-gray-600">
@@ -62,10 +79,14 @@ const ExplorerModalContent = (props) => {
                                     <div className="flex justify-around">
 
                                         <a href="#" className="flex items-center space-x-3">
-                                            <div className="flex font-bold items-baseline"><i className="uil-heart"></i> {resources.EXPLORE.LIKE}</div>
+                                            <div className="flex font-bold items-baseline">
+                                                <FiHeart className="heart" />
+                                                <span>&nbsp;</span>{resources.EXPLORE.LIKE}</div>
                                         </a>
                                         <a href="#" className="flex items-center space-x-3">
-                                            <div className="flex font-bold items-baseline"><i className="uil-share-alt"></i> {resources.EXPLORE.SHARE}</div>
+                                            <div className="flex font-bold items-baseline">
+                                                <FiShare2 className="share" />
+                                                <span>&nbsp;</span>{resources.EXPLORE.SHARE}</div>
                                         </a>
                                     </div>
                                     <hr className="-mx-4 my-3" />
@@ -109,19 +130,19 @@ const ExplorerModalContent = (props) => {
                                     }
                                 </div>
 
-                            </div></div></div><div className="simplebar-placeholder" style={{ width: "330px", height: "343px" }} ></div></div><div className="simplebar-track simplebar-horizontal" style={{ visibility: "hidden" }}><div className="simplebar-scrollbar" style={{ transform: "translate3d(0px, 0px, 0px)", visibility: "hidden" }}></div></div><div className="simplebar-track simplebar-vertical" style={{ visibility: "visible" }}><div className="simplebar-scrollbar" style={{ transform: "translate3d(0px, 0px, 0px)", visibility: "visible", height: "142px" }}></div></div></div>
+                            </div></div></div>
+                        <div className="simplebar-placeholder" style={{ width: "330px", height: "343px" }} ></div></div><div className="simplebar-track simplebar-horizontal" style={{ visibility: "hidden" }}><div className="simplebar-scrollbar" style={{ transform: "translate3d(0px, 0px, 0px)", visibility: "hidden" }}></div></div><div className="simplebar-track simplebar-vertical" style={{ visibility: "visible" }}><div className="simplebar-scrollbar" style={{ transform: "translate3d(0px, 0px, 0px)", visibility: "visible", height: "142px" }}></div></div></div>
                     <div className="p-3 border-t dark:border-gray-600">
                         <div className="bg-gray-200 dark:bg-gray-700 rounded-full rounded-md relative">
-                            <input type="text" placeholder={resources.EXPLORE.ADDEDCOMMENT} className="bg-transparent max-h-8 shadow-none" />
+                            <textarea autoComplete="off" type="text" placeholder={resources.EXPLORE.ADDEDCOMMENT} className="bg-transparent max-h-8 shadow-none input-comment" />
                             <div className="absolute bottom-0 flex h-full items-center left-0 left-3 text-xl space-x-2">
                                 <a href="#"> <i className="uil-message"></i></a>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </>,
-        true: <ExploreModalContentLoader nightMode={props.nightMode}  />
+        true: <ExploreModalContentLoader nightMode={props.nightMode} />
     }
 
     return (modalContent[isLoding])

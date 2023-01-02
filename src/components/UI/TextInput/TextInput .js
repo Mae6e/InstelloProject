@@ -1,8 +1,5 @@
 import React ,{useState} from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-const eye = <FontAwesomeIcon icon={faEye} />;
-const eyeSlash = <FontAwesomeIcon icon={faEyeSlash} />;
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const TextInput = (props) => {
 
@@ -11,7 +8,7 @@ const TextInput = (props) => {
     let inputContent;
     switch (props.type) {
         case 'password':
-            inputContent = <><input {...props} type={isPasswordShow?'text':'password'} /><i onClick={()=>setPasswordShown(!isPasswordShow)}>{isPasswordShow ? eyeSlash : eye}</i></>
+            inputContent = <><input {...props} type={isPasswordShow?'text':'password'} /><i onClick={()=>setPasswordShown(!isPasswordShow)}>{isPasswordShow ? <FaEyeSlash/> : <FaEye/>}</i></>
             break;
         default:
             break;

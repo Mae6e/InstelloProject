@@ -981,6 +981,7 @@ video {
 
 .border-t{
   border-top-width: 1px;
+  margin-top: 40px;
 }
 
 .border-r{
