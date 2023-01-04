@@ -14,7 +14,7 @@ const ExplorerModalContent = (props) => {
 
     const [post, setPost] = useState(null)
     const [isLoding, setIsLoading] = useState(true)
-    const [isShareBoxActive , setShareBoxActive] = useState(false)
+    const [isShareBoxActive, setShareBoxActive] = useState(false)
 
     useEffect(() => {
 
@@ -44,13 +44,14 @@ const ExplorerModalContent = (props) => {
 
 
     const addHeartHandler = (event) => {
-        if (!event.target.classList.toString().indexOf('heart-active'))
-            event.target.classList.remove('heart-active')
+        event.preventDefault()
+        if (event.currentTarget.children[0].children[0].classList.toString().indexOf('heart-active')!==-1)
+            event.currentTarget.children[0].children[0].classList.remove('heart-active')
         else
-            event.target.classList.add('heart-active')
+            event.currentTarget.children[0].children[0].classList.add('heart-active')
     }
 
-    const toShareHandler =()=>{
+    const toShareHandler = () => {
         setShareBoxActive(!isShareBoxActive)
     }
 
@@ -94,9 +95,9 @@ const ExplorerModalContent = (props) => {
                                 <div className="py-4 ">
                                     <div className="flex justify-around">
 
-                                        <button className="flex items-center space-x-3">
+                                        <button onClick={(event) => addHeartHandler(event)} className="flex items-center space-x-3">
                                             <div className="flex font-bold items-baseline">
-                                                <FiHeart onClick={addHeartHandler} className="heart" />
+                                                <FiHeart className="heart" />
                                                 <span>&nbsp;</span>{resources.EXPLORE.LIKE}</div>
                                         </button>
 
